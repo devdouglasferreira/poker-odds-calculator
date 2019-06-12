@@ -1,6 +1,4 @@
-# poker_odds_calculator
-
-A new Flutter project.
+# Texas Hold'em Odds Calculator
 
 ## Getting Started
 
