@@ -24,11 +24,11 @@ class MainViewState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: <Widget>[CardDeckComponent()],
+      alignment: Alignment.bottomCenter,
+      children: <Widget>[
+        CardDeckComponent()],
     );
   }
 
-  void buttonCall(){
-
-  }
+  void buttonCall() {}
 }

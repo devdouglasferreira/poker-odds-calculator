@@ -22,68 +22,66 @@ class CardDeckComponentState extends State<CardDeckComponent> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Row(children: <Widget>[
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("2"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("3"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("4"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("5"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("6"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("7"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("8"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("9"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("10"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("J"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("Q"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("K"), color: Colors.white, onPressed: () => buttonCall)))
-          ]),
-          Row(children: <Widget>[
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("2"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("3"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("4"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("5"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("6"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("7"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("8"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("9"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("10"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("J"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("Q"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("K"), color: Colors.white, onPressed: () => buttonCall)))
-          ]),
-          Row(children: <Widget>[
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("2"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("3"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("4"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("5"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("6"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("7"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("8"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("9"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("10"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("J"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("Q"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("K"), color: Colors.white, onPressed: () => buttonCall)))
-          ]),
-          Row(children: <Widget>[
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("2"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("3"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("4"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("5"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("6"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("7"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("8"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("9"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("10"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("J"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("Q"), color: Colors.white, onPressed: () => buttonCall))),
-            Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("K"), color: Colors.white, onPressed: () => buttonCall)))
-          ])
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Row(children: <Widget>[
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("2"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("3"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("4"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("5"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("6"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("7"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("8"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("9"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("10"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("J"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("Q"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("K"), color: Colors.white, onPressed: () => buttonCall)))
+        ]),
+        Row(children: <Widget>[
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("2"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("3"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("4"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("5"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("6"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("7"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("8"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("9"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("10"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("J"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("Q"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("K"), color: Colors.white, onPressed: () => buttonCall)))
+        ]),
+        Row(children: <Widget>[
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("2"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("3"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("4"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("5"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("6"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("7"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("8"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("9"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("10"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("J"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("Q"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("K"), color: Colors.white, onPressed: () => buttonCall)))
+        ]),
+        Row(children: <Widget>[
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("2"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("3"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("4"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("5"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("6"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("7"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("8"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("9"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("10"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("J"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("Q"), color: Colors.white, onPressed: () => buttonCall))),
+          Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("K"), color: Colors.white, onPressed: () => buttonCall)))
+        ])
+      ],
     );
   }
 
