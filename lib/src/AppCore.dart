@@ -5,9 +5,9 @@ import 'package:poker_odds_calculator/src/views/main_view.dart';
 class AppCore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Container(child: Center(child: MainView()), color: Color.fromRGBO(0, 64, 0, 1.0)),
-      debugShowCheckedModeBanner: false,
+    return Container(
+      child: Directionality(child: MainView(), textDirection: TextDirection.ltr),
+      decoration: BoxDecoration(color: Color.fromRGBO(8, 80, 0, 1)),
     );
   }
 }

@@ -24,6 +24,7 @@ class CardDeckComponentState extends State<CardDeckComponent> {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Row(children: <Widget>[
             Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: MaterialButton(child: Text("2"), color: Colors.white, onPressed: () => buttonCall))),
