@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:poker_odds_calculator/src/blocs/HandBloc.dart';
+import 'package:poker_odds_calculator/src/blocs/hand_bloc.dart';
 
 class OpponentComponent extends StatefulWidget {
   

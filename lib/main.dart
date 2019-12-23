@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:poker_odds_calculator/src/AppCore.dart';
+import 'src/app_core.dart';
 
 void main() {
-  runApp(AppCore());
+  runApp(ApplicationCore());
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
   ));

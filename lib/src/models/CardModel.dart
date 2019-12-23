@@ -1,10 +1,14 @@
+import 'package:flutter/material.dart';
+
 class CardModel {
   int value;
   String suit;
+  Key key;
 
-  CardModel(int value, String suit){
+  CardModel(int value, String suit, Key key){
     this.value = value;
     this.suit = suit;
+    this.key = key;
   }
 }
 

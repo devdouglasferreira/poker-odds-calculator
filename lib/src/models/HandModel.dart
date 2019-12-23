@@ -3,8 +3,14 @@ import 'CardModel.dart';
 class HandModel {
 
   int numberOfOponents;
-  List<CardModel> currentHand = new List<CardModel>(2);
-  List<CardModel> communityCards = new List<CardModel>(5);
+  List<CardModel> currentHand;
+  List<CardModel> communityCards;
+
+  HandModel(){
+    currentHand = new List<CardModel>();
+    communityCards = new List<CardModel>();
+    numberOfOponents = 0;
+  }
   
   double probabilityToToWin;
   double probabilityOfTie;

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:poker_odds_calculator/src/blocs/HandBloc.dart';
+import 'package:poker_odds_calculator/src/blocs/hand_bloc.dart';
 import 'package:poker_odds_calculator/src/view_components/card_deck.dart';
 import 'package:poker_odds_calculator/src/view_components/oponent.dart';
+import 'package:poker_odds_calculator/src/view_components/opponents_setup.dart';
 
 class MainView extends StatefulWidget {
   @override
@@ -12,9 +13,8 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
-  
   HandBloc _handBloc = new HandBloc();
-  
+
   @override
   void initState() {
     super.initState();
@@ -28,13 +28,12 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: <Widget>[
-        OpponentComponent(_handBloc),
-        CardDeckComponent(_handBloc)
-        ],
-    );
+    return Material(
+        color: Color.fromRGBO(8, 80, 0, 1),
+        child: SafeArea(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[OpponentSetupComponent(_handBloc), OpponentComponent(_handBloc), CardDeckComponent(_handBloc)],
+        )));
   }
-  
 }
