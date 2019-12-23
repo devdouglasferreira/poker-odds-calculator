@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:poker_odds_calculator/src/blocs/HandBloc.dart';
+import 'package:poker_odds_calculator/src/models/CardModel.dart';
 
 class CardDeckComponent extends StatefulWidget {
+  
+  HandBloc _handBloc;
+  
+  CardDeckComponent(HandBloc handBloc){
+    this._handBloc = handBloc;
+  }
+  
   @override
   State<StatefulWidget> createState() {
-    return CardDeckComponentState();
+    return CardDeckComponentState(_handBloc);
   }
 }
 
 class CardDeckComponentState extends State<CardDeckComponent> {
+
+  HandBloc _handBloc;
+  
+  CardDeckComponentState(HandBloc handBloc){
+    this._handBloc = handBloc;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -23,23 +39,42 @@ class CardDeckComponentState extends State<CardDeckComponent> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
-        Row(children: fillSuitRow('clubs')),
-        Row(children: fillSuitRow('diamonds')),
-        Row(children: fillSuitRow('spades')),
-        Row(children: fillSuitRow('hearts'))
-      ],
+        Row(children: fillSuitRow(Suit.clubs)),
+        Row(children: fillSuitRow(Suit.diamonds)),
+        Row(children: fillSuitRow(Suit.spades)), 
+        Row(children: fillSuitRow(Suit.hearts))
+        ],
     );
   }
 
-  List<Widget> fillSuitRow(String suitName){
+  List<Widget> fillSuitRow(String suit) {
     List<Widget> suitRow = new List<Widget>();
-    for (int i = 2; i < 15; i++){
-      suitRow.add(Flexible(flex: 3, child: AspectRatio(aspectRatio: 0.66, child: FlatButton(onPressed: null, padding: EdgeInsets.all(0.0), child: Image.asset('assets/images/${suitName}_${i.toString()}.png')))));
+    
+    for (int i = 2; i < 15; i++) {
+      CardModel card = new CardModel(i, suit);
+
+      String cardName = '${suit}_${i.toString()}';
+      Key key = new Key(cardName);
+      suitRow.add(Flexible(
+        flex: 3, 
+        child: AspectRatio(
+          aspectRatio: 0.66, 
+          child: FlatButton(
+            key: key,
+            onPressed: () => _handBloc.selectCard(card), 
+            padding: EdgeInsets.all(0.0), 
+            child: Image.asset('assets/images/$cardName.png')
+            )
+          )
+        )
+      );
     }
     return suitRow;
   }
 
-  void buttonCall() {}
+  void cardSelected(Key keyCard) {
+    
+  }
 }
