@@ -4,8 +4,9 @@ class CardModel {
   int value;
   String suit;
   Key key;
+  bool isSelected = false;
 
-  CardModel(int value, String suit, Key key){
+  CardModel(int value, String suit, Key key) {
     this.value = value;
     this.suit = suit;
     this.key = key;

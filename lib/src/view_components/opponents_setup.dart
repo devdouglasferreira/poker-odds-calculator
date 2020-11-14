@@ -24,14 +24,24 @@ class OpponentSetupComponentState extends State<OpponentSetupComponent> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Row( mainAxisAlignment: MainAxisAlignment.end,
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         Column(
-          children: <Widget>[Text('Number of Opponents', style: TextStyle(color: Colors.white)), StreamBuilder(stream: _handBloc.handOutputs, builder: (context, snapshot) => Text('${_handBloc.hand.numberOfOponents}', style: TextStyle(color: Colors.white)))],
+          children: <Widget>[
+            Text('Number of Opponents', style: TextStyle(color: Colors.white)),
+            StreamBuilder(
+                stream: _handBloc.handStream,
+                builder: (context, snapshot) => Text('${_handBloc.hand.numberOfOponents}', style: TextStyle(color: Colors.white)))
+          ],
         ),
         Column(
           children: <Widget>[
-            IconButton(alignment: Alignment.bottomCenter, icon: Icon(Icons.arrow_drop_up), color: Colors.white, onPressed: () => _handBloc.addOpponent()),
+            IconButton(
+                alignment: Alignment.bottomCenter,
+                icon: Icon(Icons.arrow_drop_up),
+                color: Colors.white,
+                onPressed: () => _handBloc.addOpponent()),
             IconButton(icon: Icon(Icons.arrow_drop_down), color: Colors.white, onPressed: () => _handBloc.removeOpponent())
           ],
         )
