@@ -56,7 +56,7 @@ class _CardDeckComponentState extends State<CardDeckComponent> {
   }
 
   List<Widget> _fillSuitRow(String suit) {
-    List<Widget> suitRow = new List<Widget>();
+    List<Widget> suitRow = [];
 
     for (int i = 2; i < 15; i++) {
       String cardName = '${suit}_${i.toString()}';
@@ -73,11 +73,8 @@ class _CardDeckComponentState extends State<CardDeckComponent> {
                   stream: _deckBloc.cardStream,
                   builder: (context, x) => Opacity(
                       opacity: _deckBloc.cardDeck[cardIndex].isSelected == true ? 0.3 : 1,
-                      child: FlatButton(
-                          key: key,
-                          onPressed: () => updateClickedCard(_deckBloc.cardDeck[cardIndex]),
-                          padding: EdgeInsets.all(0.0),
-                          child: Image.asset('assets/images/$cardName.png')))))));
+                      child: InkWell(
+                          key: key, onTap: () => updateClickedCard(_deckBloc.cardDeck[cardIndex]), child: Image.asset('assets/images/$cardName.png')))))));
     }
     return suitRow;
   }
