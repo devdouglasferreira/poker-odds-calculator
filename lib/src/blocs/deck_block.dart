@@ -3,13 +3,12 @@ import 'dart:async';
 import '../models/CardModel.dart';
 
 class DeckBloc {
-  final StreamController<List<CardModel>> _cardState =
-      StreamController<List<CardModel>>.broadcast();
+  final StreamController<List<CardModel>> _cardState = StreamController<List<CardModel>>.broadcast();
 
   List<CardModel> cardDeck;
 
   DeckBloc() {
-    cardDeck = new List<CardModel>();
+    cardDeck = <CardModel>[];
   }
 
   StreamSink<List<CardModel>> get cardSink => _cardState.sink;

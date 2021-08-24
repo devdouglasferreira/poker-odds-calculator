@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:poker_odds_calculator/src/blocs/deck_block.dart';
 import 'package:poker_odds_calculator/src/blocs/hand_bloc.dart';
 import 'package:poker_odds_calculator/src/view_components/card_deck.dart';
+import 'package:poker_odds_calculator/src/view_components/game_hand.dart';
 import 'package:poker_odds_calculator/src/view_components/oponent.dart';
 import 'package:poker_odds_calculator/src/view_components/opponents_setup.dart';
 
@@ -36,8 +37,9 @@ class _MainViewState extends State<MainView> {
             child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
+            GameHandComponent(_handBloc),
             OpponentSetupComponent(_handBloc),
-            OpponentComponent(_handBloc),
+            //OpponentComponent(_handBloc),
             CardDeckComponent(_handBloc, _cardDeckBloc)
           ],
         )));

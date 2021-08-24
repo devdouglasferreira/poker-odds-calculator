@@ -51,10 +51,6 @@ class _CardDeckComponentState extends State<CardDeckComponent> {
         ));
   }
 
-  void updateClickedCard(CardModel card) {
-    _handBloc.selectCardToHand(card, _deckBloc);
-  }
-
   List<Widget> _fillSuitRow(String suit) {
     List<Widget> suitRow = [];
 
@@ -74,7 +70,10 @@ class _CardDeckComponentState extends State<CardDeckComponent> {
                   builder: (context, x) => Opacity(
                       opacity: _deckBloc.cardDeck[cardIndex].isSelected == true ? 0.3 : 1,
                       child: InkWell(
-                          key: key, onTap: () => updateClickedCard(_deckBloc.cardDeck[cardIndex]), child: Image.asset('assets/images/$cardName.png')))))));
+                        key: key,
+                        onTap: () => _handBloc.selectCardToHand(_deckBloc.cardDeck[cardIndex], _deckBloc),
+                        child: Image.asset('assets/images/$cardName.png'),
+                      ))))));
     }
     return suitRow;
   }

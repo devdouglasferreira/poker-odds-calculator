@@ -4,6 +4,8 @@ import 'package:poker_odds_calculator/src/models/CardModel.dart';
 import 'package:poker_odds_calculator/src/models/HandModel.dart';
 
 class HandBloc {
+  String _playerCardA, _playerCardB;
+
   HandModel hand;
 
   HandBloc() {
@@ -14,6 +16,7 @@ class HandBloc {
 
   StreamSink<HandModel> get handSink => _handStateController.sink;
   Stream<HandModel> get handStream => _handStateController.stream;
+  List<String> get getSelectedPlayerCardsImgPath => [_playerCardA, _playerCardB];
 
   void selectCardToHand(CardModel card, DeckBloc deck) {
     if (hand.currentHand.length < 2 && card.isSelected == false) {
@@ -35,6 +38,7 @@ class HandBloc {
     }
 
     handSink.add(hand);
+    _updatePlayerHandCard();
   }
 
   void addOpponent() {
@@ -49,5 +53,18 @@ class HandBloc {
 
   void close() {
     _handStateController.close();
+  }
+
+  void _updatePlayerHandCard() {
+    if (hand.currentHand.length == 1) {
+      _playerCardA = "assets/images/${hand.currentHand[0].suit}_${hand.currentHand[0].value.toString()}.png";
+      _playerCardB = null;
+    } else if (hand.currentHand.length == 2) {
+      _playerCardA = "assets/images/${hand.currentHand[0].suit}_${hand.currentHand[0].value.toString()}.png";
+      _playerCardB = "assets/images/${hand.currentHand[1].suit}_${hand.currentHand[1].value.toString()}.png";
+    } else {
+      _playerCardA = null;
+      _playerCardB = null;
+    }
   }
 }
