@@ -2,11 +2,12 @@ import 'dart:async';
 import 'package:poker_odds_calculator/src/blocs/deck_block.dart';
 import 'package:poker_odds_calculator/src/models/CardModel.dart';
 import 'package:poker_odds_calculator/src/models/HandModel.dart';
+import 'package:poker_odds_calculator/src/models/round.dart';
 
 class HandBloc {
-  String _playerCardA, _playerCardB;
-
+  CardModel _playerCardA, _playerCardB;
   HandModel hand;
+  String currentRound = Rounds.preflop;
 
   HandBloc() {
     hand = new HandModel();
@@ -16,7 +17,7 @@ class HandBloc {
 
   StreamSink<HandModel> get handSink => _handStateController.sink;
   Stream<HandModel> get handStream => _handStateController.stream;
-  List<String> get getSelectedPlayerCardsImgPath => [_playerCardA, _playerCardB];
+  List<CardModel> get getSelectedPlayerCardsImgPath => [_playerCardA, _playerCardB];
 
   void selectCardToHand(CardModel card, DeckBloc deck) {
     if (hand.currentHand.length < 2 && card.isSelected == false) {
@@ -39,11 +40,14 @@ class HandBloc {
 
     handSink.add(hand);
     _updatePlayerHandCard();
+    _updateCurrentRound();
   }
 
   void addOpponent() {
-    hand.numberOfOponents++;
-    handSink.add(hand);
+    if (hand.numberOfOponents < 9) {
+      hand.numberOfOponents++;
+      handSink.add(hand);
+    }
   }
 
   void removeOpponent() {
@@ -55,13 +59,26 @@ class HandBloc {
     _handStateController.close();
   }
 
+  void _updateCurrentRound() {
+    if (hand.communityCards.length < 1)
+      currentRound = Rounds.preflop;
+    else if (hand.communityCards.length < 4)
+      currentRound = Rounds.flop;
+    else if (hand.communityCards.length < 4)
+      currentRound = Rounds.flop;
+    else if (hand.communityCards.length < 5)
+      currentRound = Rounds.river;
+    else
+      currentRound = Rounds.turn;
+  }
+
   void _updatePlayerHandCard() {
     if (hand.currentHand.length == 1) {
-      _playerCardA = "assets/images/${hand.currentHand[0].suit}_${hand.currentHand[0].value.toString()}.png";
+      _playerCardA = hand.currentHand[0];
       _playerCardB = null;
     } else if (hand.currentHand.length == 2) {
-      _playerCardA = "assets/images/${hand.currentHand[0].suit}_${hand.currentHand[0].value.toString()}.png";
-      _playerCardB = "assets/images/${hand.currentHand[1].suit}_${hand.currentHand[1].value.toString()}.png";
+      _playerCardA = hand.currentHand[0];
+      _playerCardB = hand.currentHand[1];
     } else {
       _playerCardA = null;
       _playerCardB = null;

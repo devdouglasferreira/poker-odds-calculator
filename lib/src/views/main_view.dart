@@ -32,9 +32,9 @@ class _MainViewState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
     return Material(
-        color: Color.fromRGBO(8, 80, 0, 1),
-        child: SafeArea(
-            child: Column(
+      color: Color.fromRGBO(8, 80, 0, 1),
+      child: SafeArea(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             GameHandComponent(_handBloc),
@@ -42,6 +42,8 @@ class _MainViewState extends State<MainView> {
             //OpponentComponent(_handBloc),
             CardDeckComponent(_handBloc, _cardDeckBloc)
           ],
-        )));
+        ),
+      ),
+    );
   }
 }

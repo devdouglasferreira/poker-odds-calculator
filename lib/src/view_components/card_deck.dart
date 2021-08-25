@@ -61,19 +61,25 @@ class _CardDeckComponentState extends State<CardDeckComponent> {
       _deckBloc.cardDeck.add(card);
       int cardIndex = _deckBloc.cardDeck.indexOf((card));
 
-      suitRow.add(Flexible(
+      suitRow.add(
+        Flexible(
           flex: 3,
           child: AspectRatio(
-              aspectRatio: 0.66,
-              child: StreamBuilder(
-                  stream: _deckBloc.cardStream,
-                  builder: (context, x) => Opacity(
-                      opacity: _deckBloc.cardDeck[cardIndex].isSelected == true ? 0.3 : 1,
-                      child: InkWell(
-                        key: key,
-                        onTap: () => _handBloc.selectCardToHand(_deckBloc.cardDeck[cardIndex], _deckBloc),
-                        child: Image.asset('assets/images/$cardName.png'),
-                      ))))));
+            aspectRatio: 0.66,
+            child: StreamBuilder(
+              stream: _deckBloc.cardStream,
+              builder: (context, x) => Opacity(
+                opacity: _deckBloc.cardDeck[cardIndex].isSelected == true ? 0.3 : 1,
+                child: InkWell(
+                  key: key,
+                  onTap: () => _handBloc.selectCardToHand(_deckBloc.cardDeck[cardIndex], _deckBloc),
+                  child: Image.asset('assets/images/$cardName.png'),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
     }
     return suitRow;
   }
