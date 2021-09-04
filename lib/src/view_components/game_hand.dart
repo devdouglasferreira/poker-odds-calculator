@@ -26,7 +26,7 @@ class GameHandComponentState extends State<GameHandComponent> {
           stream: _handBloc.handStream,
           builder: (context, snapshot) => Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: _updateCommunityCards(),
+            children: _updateCommunityCards(_handBloc.selectedComunityCards),
           ),
         ),
         Padding(
@@ -43,7 +43,7 @@ class GameHandComponentState extends State<GameHandComponent> {
           stream: _handBloc.handStream,
           builder: (context, snapshot) => Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: _updatePlayersSelectedCards(_handBloc.getSelectedPlayerCardsImgPath),
+            children: _updatePlayersSelectedCards(_handBloc.selectedPlayerCards),
           ),
         ),
       ],
@@ -51,32 +51,21 @@ class GameHandComponentState extends State<GameHandComponent> {
     );
   }
 
-  List<Widget> _updatePlayersSelectedCards(List<CardModel> selectedCardsPath) {
-    Widget _playerCardA, _playerCardB;
-
-    if (selectedCardsPath[0] != null)
-      _playerCardA = Image.asset("assets/images/${selectedCardsPath[0].suit}_${selectedCardsPath[0].value}.png");
-    else
-      _playerCardA = _cardPlaceHolder();
-
-    if (selectedCardsPath[1] != null)
-      _playerCardB = Image.asset("assets/images/${selectedCardsPath[1].suit}_${selectedCardsPath[1].value}.png");
-    else
-      _playerCardB = _cardPlaceHolder();
-
-    return [_playerCardA, _playerCardB];
+  List<Widget> _updatePlayersSelectedCards(List<CardModel> selectedCards) {
+    List<Widget> playerCards = [_cardPlaceHolder(), _cardPlaceHolder()];
+    return _fillSelectedCards(selectedCards, playerCards);
   }
 
-  List<Widget> _updateCommunityCards() {
-    Widget communityA, communityB, communityC, communityD, communityE;
+  List<Widget> _updateCommunityCards(List<CardModel> selectedCards) {
+    List<Widget> comunityCards = [_cardPlaceHolder(), _cardPlaceHolder(), _cardPlaceHolder(), _cardPlaceHolder(), _cardPlaceHolder()];
+    return _fillSelectedCards(selectedCards, comunityCards);
+  }
 
-    communityA = _cardPlaceHolder();
-    communityB = _cardPlaceHolder();
-    communityC = _cardPlaceHolder();
-    communityD = _cardPlaceHolder();
-    communityE = _cardPlaceHolder();
-
-    return [communityA, communityB, communityC, communityD, communityE];
+  List<Widget> _fillSelectedCards(List<CardModel> selectedCards, List<Widget> widgetTemplate) {
+    for (int i = 0; i < selectedCards.length; i++) {
+      widgetTemplate[i] = Image.asset("assets/images/${selectedCards[i].suit}_${selectedCards[i].value}.png");
+    }
+    return widgetTemplate;
   }
 
   Widget _cardPlaceHolder() {

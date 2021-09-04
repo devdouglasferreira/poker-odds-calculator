@@ -8,7 +8,7 @@ class HandModel {
   HandModel() {
     currentHand = [];
     communityCards = [];
-    numberOfOponents = 0;
+    numberOfOponents = 1;
   }
 
   double probabilityToToWin;

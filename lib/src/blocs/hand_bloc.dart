@@ -5,7 +5,9 @@ import 'package:poker_odds_calculator/src/models/HandModel.dart';
 import 'package:poker_odds_calculator/src/models/round.dart';
 
 class HandBloc {
-  CardModel _playerCardA, _playerCardB;
+  List<CardModel> _selectedPlayerCards = [];
+  List<CardModel> _selectedCommunityCards = [];
+
   HandModel hand;
   String currentRound = Rounds.preflop;
 
@@ -17,7 +19,9 @@ class HandBloc {
 
   StreamSink<HandModel> get handSink => _handStateController.sink;
   Stream<HandModel> get handStream => _handStateController.stream;
-  List<CardModel> get getSelectedPlayerCardsImgPath => [_playerCardA, _playerCardB];
+
+  List<CardModel> get selectedComunityCards => _selectedCommunityCards;
+  List<CardModel> get selectedPlayerCards => _selectedPlayerCards;
 
   void selectCardToHand(CardModel card, DeckBloc deck) {
     if (hand.currentHand.length < 2 && card.isSelected == false) {
@@ -40,6 +44,7 @@ class HandBloc {
 
     handSink.add(hand);
     _updatePlayerHandCard();
+    _updateCommunityCard();
     _updateCurrentRound();
   }
 
@@ -51,7 +56,7 @@ class HandBloc {
   }
 
   void removeOpponent() {
-    if (hand.numberOfOponents > 0) hand.numberOfOponents--;
+    if (hand.numberOfOponents > 1) hand.numberOfOponents--;
     handSink.add(hand);
   }
 
@@ -73,15 +78,20 @@ class HandBloc {
   }
 
   void _updatePlayerHandCard() {
-    if (hand.currentHand.length == 1) {
-      _playerCardA = hand.currentHand[0];
-      _playerCardB = null;
-    } else if (hand.currentHand.length == 2) {
-      _playerCardA = hand.currentHand[0];
-      _playerCardB = hand.currentHand[1];
-    } else {
-      _playerCardA = null;
-      _playerCardB = null;
+    _selectedPlayerCards = [];
+    if (hand.currentHand.isNotEmpty) {
+      for (int i = 0; i < hand.currentHand.length; i++) {
+        _selectedPlayerCards.add(hand.currentHand[i]);
+      }
+    }
+  }
+
+  void _updateCommunityCard() {
+    _selectedCommunityCards = [];
+    if (hand.communityCards.isNotEmpty) {
+      for (int i = 0; i < hand.communityCards.length; i++) {
+        _selectedCommunityCards.add(hand.communityCards[i]);
+      }
     }
   }
 }
