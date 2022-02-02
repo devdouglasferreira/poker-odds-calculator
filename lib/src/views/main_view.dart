@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:poker_odds_calculator/src/blocs/deck_block.dart';
 import 'package:poker_odds_calculator/src/blocs/hand_bloc.dart';
-import 'package:poker_odds_calculator/src/view_components/card_deck.dart';
-import 'package:poker_odds_calculator/src/view_components/game_hand.dart';
-import 'package:poker_odds_calculator/src/view_components/opponents_setup.dart';
+import 'package:poker_odds_calculator/src/components/card_deck.dart';
+import 'package:poker_odds_calculator/src/components/game_hand.dart';
+import 'package:poker_odds_calculator/src/components/opponents_setup.dart';
+import 'package:poker_odds_calculator/src/components/rank_probabilities.dart';
 
 class MainView extends StatefulWidget {
   @override
@@ -36,16 +36,18 @@ class _MainViewState extends State<MainView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
+            RankProbabilitiesComponent(_handBloc),
             GameHandComponent(_handBloc),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Padding(padding: EdgeInsets.only(left:15, right:5),
+              Padding(
+                  padding: EdgeInsets.only(left: 15, right: 5),
                   child: StreamBuilder(
-                stream: _handBloc.handStream,
-                builder: (context, snapshot) => Text(
-                  '${_handBloc.hand.currentRank ?? ''}',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
-              )),
+                    stream: _handBloc.handStream,
+                    builder: (context, snapshot) => Text(
+                      '${_handBloc.hand.currentRank ?? ''}',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                  )),
               OpponentSetupComponent(_handBloc),
             ]),
             CardDeckComponent(_handBloc, _cardDeckBloc),

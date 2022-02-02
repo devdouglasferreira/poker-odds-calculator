@@ -73,11 +73,11 @@ class HandBloc {
       currentRound = Rounds.flop;
       if (hand.communityCards.length == 3) hand.computeProbabilities();
     } else if (hand.communityCards.length < 5) {
-      currentRound = Rounds.river;
+      currentRound = Rounds.turn;
       hand.computeProbabilities();
     } else {
       hand.computeProbabilities();
-      currentRound = Rounds.turn;
+      currentRound = Rounds.river;
     }
   }
 

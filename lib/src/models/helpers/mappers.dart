@@ -1,3 +1,5 @@
+import 'package:flutter/scheduler.dart';
+
 import '../card_model.dart';
 
 class Mappers {
@@ -11,10 +13,12 @@ class Mappers {
         return Suit.diamonds;
       case 3:
         return Suit.spades;
+      default:
+        throw new RangeError("index value suit should be up to 3");
     }
   }
 
-  static int MapRank(String rank) {
+  static int mapRank(String rank) {
     if (rank == Ranks.pair) return 1;
     if (rank == Ranks.twoPairs) return 2;
     if (rank == Ranks.threeOfAKind) return 3;
