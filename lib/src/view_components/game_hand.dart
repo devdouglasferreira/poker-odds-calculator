@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poker_odds_calculator/src/blocs/hand_bloc.dart';
-import 'package:poker_odds_calculator/src/models/CardModel.dart';
+import 'package:poker_odds_calculator/src/models/card_model.dart';
 
 class GameHandComponent extends StatefulWidget {
   final HandBloc _handBloc;

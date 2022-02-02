@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import '../models/CardModel.dart';
+import '../models/card_model.dart';
 
 class DeckBloc {
   final StreamController<List<CardModel>> _cardState = StreamController<List<CardModel>>.broadcast();

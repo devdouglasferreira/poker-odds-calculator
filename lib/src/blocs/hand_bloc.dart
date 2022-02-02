@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:poker_odds_calculator/src/blocs/deck_block.dart';
-import 'package:poker_odds_calculator/src/models/CardModel.dart';
-import 'package:poker_odds_calculator/src/models/HandModel.dart';
-import 'package:poker_odds_calculator/src/models/round.dart';
+import 'package:poker_odds_calculator/src/models/card_model.dart';
+import 'package:poker_odds_calculator/src/models/hand_model.dart';
+import 'package:poker_odds_calculator/src/models/helpers/round.dart';
 
 class HandBloc {
   List<CardModel> _selectedPlayerCards = [];
@@ -65,16 +65,20 @@ class HandBloc {
   }
 
   void _updateCurrentRound() {
-    if (hand.communityCards.length < 1)
+    if (hand.communityCards.length < 1) {
       currentRound = Rounds.preflop;
-    else if (hand.communityCards.length < 4)
+      if (hand.currentHand.length == 2) 
+      hand.computeProbabilities();
+    } else if (hand.communityCards.length < 4) {
       currentRound = Rounds.flop;
-    else if (hand.communityCards.length < 4)
-      currentRound = Rounds.flop;
-    else if (hand.communityCards.length < 5)
+      if (hand.communityCards.length == 3) hand.computeProbabilities();
+    } else if (hand.communityCards.length < 5) {
       currentRound = Rounds.river;
-    else
+      hand.computeProbabilities();
+    } else {
+      hand.computeProbabilities();
       currentRound = Rounds.turn;
+    }
   }
 
   void _updatePlayerHandCard() {

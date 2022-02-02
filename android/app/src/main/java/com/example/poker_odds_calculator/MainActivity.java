@@ -1,4 +1,4 @@
-package com.example.poker_odds_calculator;
+package br.com.ferreiratech.pokeroddscalculator;
 
 import io.flutter.embedding.android.FlutterActivity;
 

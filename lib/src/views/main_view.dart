@@ -37,7 +37,17 @@ class _MainViewState extends State<MainView> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             GameHandComponent(_handBloc),
-            OpponentSetupComponent(_handBloc),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Padding(padding: EdgeInsets.only(left:15, right:5),
+                  child: StreamBuilder(
+                stream: _handBloc.handStream,
+                builder: (context, snapshot) => Text(
+                  '${_handBloc.hand.currentRank ?? ''}',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
+              )),
+              OpponentSetupComponent(_handBloc),
+            ]),
             CardDeckComponent(_handBloc, _cardDeckBloc),
           ],
         ),

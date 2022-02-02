@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:poker_odds_calculator/src/blocs/deck_block.dart';
 
 import 'package:poker_odds_calculator/src/blocs/hand_bloc.dart';
-import 'package:poker_odds_calculator/src/models/CardModel.dart';
+import 'package:poker_odds_calculator/src/models/card_model.dart';
 
 class CardDeckComponent extends StatefulWidget {
   final HandBloc _handBloc;
@@ -43,10 +42,10 @@ class _CardDeckComponentState extends State<CardDeckComponent> {
         margin: EdgeInsets.only(bottom: 20, left: 5, right: 5),
         child: Column(
           children: <Widget>[
-            Row(children: _fillSuitRow(Suit.clubs)),
-            Row(children: _fillSuitRow(Suit.diamonds)),
-            Row(children: _fillSuitRow(Suit.spades)),
-            Row(children: _fillSuitRow(Suit.hearts))
+            Row(children: _fillSuitRow('clubs')),
+            Row(children: _fillSuitRow('diamonds')),
+            Row(children: _fillSuitRow('spades')),
+            Row(children: _fillSuitRow('hearts'))
           ],
         ));
   }
