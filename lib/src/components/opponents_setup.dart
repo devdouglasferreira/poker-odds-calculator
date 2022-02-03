@@ -43,7 +43,7 @@ class OpponentSetupComponentState extends State<OpponentSetupComponent> {
               padding: EdgeInsets.only(left: 10, right: 10),
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.orange.shade700),
+                  backgroundColor: MaterialStateProperty.all(Color(0xFFA65F08)),
                   shape: MaterialStateProperty.all(CircleBorder()),
                 ),
                 child: Icon(Icons.arrow_upward),
@@ -54,7 +54,7 @@ class OpponentSetupComponentState extends State<OpponentSetupComponent> {
               padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.orange.shade700),
+                  backgroundColor: MaterialStateProperty.all(Color(0xFFA65F08)),
                   shape: MaterialStateProperty.all(CircleBorder()),
                 ),
                 child: Icon(Icons.arrow_downward),

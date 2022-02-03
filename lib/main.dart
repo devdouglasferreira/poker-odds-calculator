@@ -4,7 +4,4 @@ import 'src/app_core.dart';
 
 void main() {
   runApp(ApplicationCore());
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-  ));
 }

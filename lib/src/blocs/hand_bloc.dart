@@ -1,14 +1,17 @@
 import 'dart:async';
-import 'package:poker_odds_calculator/src/blocs/deck_block.dart';
+import 'package:poker_odds_calculator/src/blocs/deck_bloc.dart';
 import 'package:poker_odds_calculator/src/models/card_model.dart';
 import 'package:poker_odds_calculator/src/models/hand_model.dart';
+import 'package:poker_odds_calculator/src/models/helpers/hand_matcher.dart';
 import 'package:poker_odds_calculator/src/models/helpers/round.dart';
+import 'package:poker_odds_calculator/src/models/probability_model.dart';
 
 class HandBloc {
   List<CardModel> _selectedPlayerCards = [];
   List<CardModel> _selectedCommunityCards = [];
 
   HandModel hand;
+  Probability probability;
   String currentRound = Rounds.preflop;
 
   HandBloc() {
@@ -16,14 +19,19 @@ class HandBloc {
   }
 
   final StreamController<HandModel> _handStateController = StreamController<HandModel>.broadcast();
+  final StreamController<Probability> _probabilityController = StreamController<Probability>.broadcast();
 
   StreamSink<HandModel> get handSink => _handStateController.sink;
   Stream<HandModel> get handStream => _handStateController.stream;
 
+  StreamSink<Probability> get probabilitySink => _probabilityController.sink;
+  Stream<Probability> get probabilityStream => _probabilityController.stream;
+
   List<CardModel> get selectedComunityCards => _selectedCommunityCards;
   List<CardModel> get selectedPlayerCards => _selectedPlayerCards;
 
-  void selectCardToHand(CardModel card, DeckBloc deck) {
+  Future selectCardToHand(DeckBloc deck, int cardIndex) async {
+    CardModel card = deck.cardDeck[cardIndex];
     if (hand.currentHand.length < 2 && card.isSelected == false) {
       card.isSelected = true;
       hand.currentHand.add(card);
@@ -42,10 +50,12 @@ class HandBloc {
       deck.selectCard(card);
     }
 
-    handSink.add(hand);
     _updatePlayerHandCard();
     _updateCommunityCard();
-    _updateCurrentRound();
+    await updateCurrentRound();
+
+    handSink.add(hand);
+    
   }
 
   void addOpponent() {
@@ -56,29 +66,31 @@ class HandBloc {
   }
 
   void removeOpponent() {
-    if (hand.numberOfOponents > 1) hand.numberOfOponents--;
-    handSink.add(hand);
+    if (hand.numberOfOponents > 1) {
+      hand.numberOfOponents--;
+      handSink.add(hand);
+    }
   }
 
-  void close() {
-    _handStateController.close();
-  }
-
-  void _updateCurrentRound() {
+  Future updateCurrentRound() async {
+    
     if (hand.communityCards.length < 1) {
       currentRound = Rounds.preflop;
-      if (hand.currentHand.length == 2) 
-      hand.computeProbabilities();
+      if (hand.currentHand.length == 2) probability = await hand.computeProbabilities();
     } else if (hand.communityCards.length < 4) {
       currentRound = Rounds.flop;
-      if (hand.communityCards.length == 3) hand.computeProbabilities();
+      if (hand.communityCards.length == 3) probability = await hand.computeProbabilities();
     } else if (hand.communityCards.length < 5) {
       currentRound = Rounds.turn;
-      hand.computeProbabilities();
+      probability = await hand.computeProbabilities();
     } else {
-      hand.computeProbabilities();
+      probability = await hand.computeProbabilities();
       currentRound = Rounds.river;
     }
+    
+    var result = HandMatcher.getHandRank(hand.currentHand + hand.communityCards);
+    hand.currentRank = result.item1;
+    probabilitySink.add(probability);
   }
 
   void _updatePlayerHandCard() {
@@ -97,5 +109,10 @@ class HandBloc {
         _selectedCommunityCards.add(hand.communityCards[i]);
       }
     }
+  }
+
+  void close() {
+    _handStateController.close();
+    _probabilityController.close();
   }
 }

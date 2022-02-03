@@ -1,5 +1,3 @@
-import 'package:flutter/scheduler.dart';
-
 import '../card_model.dart';
 
 class Mappers {

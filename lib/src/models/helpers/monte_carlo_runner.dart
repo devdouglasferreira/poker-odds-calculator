@@ -12,13 +12,12 @@ class MonteCarloSimulation {
   static UnmodifiableListView<CardModel> _referenceDeck;
   static UnmodifiableListView<CardModel> get referenceDeck => _referenceDeck ?? _generateReferenceDeck();
 
-  static Probability runSimulation(HandModel hand, {int executions = 50000}) {
-
+  static Future<Probability> runSimulation(HandModel hand, {int executions = 50000}) async {
     Probability results = new Probability();
     var outcomes = new Map<String, double>();
 
     for (int i = 0; i < executions; i++) {
-      List<CardModel> currentDeck = referenceDeck.toList();
+      var currentDeck = referenceDeck.toList();
       List<CardModel> localPlayerHand = [];
       List<CardModel> localCommunity = [];
       Map<int, List<CardModel>> virtualOpponent = Map();
@@ -29,8 +28,7 @@ class MonteCarloSimulation {
       currentDeck.removeWhere((i) => localPlayerHand.any((j) => j.suit == i.suit && j.value == i.value));
       currentDeck.shuffle();
 
-      for (int i = 0; i < hand.numberOfOponents; i++)
-      {
+      for (int i = 0; i < hand.numberOfOponents; i++) {
         List<CardModel> x = [];
         x.add(currentDeck.removeLast());
         x.add(currentDeck.removeLast());
@@ -43,13 +41,14 @@ class MonteCarloSimulation {
 
       localPlayerHand.addAll(localCommunity);
       var playerResult = HandMatcher.getHandRank(localPlayerHand);
-      
+
       results.scenarios++;
       outcomes.update(playerResult.item1, (x) => ++x, ifAbsent: () => 1);
     }
 
     _calculateProbability(results, outcomes);
 
+    return await Future.value(results);
   }
 
   static UnmodifiableListView<CardModel> _generateReferenceDeck() {
@@ -63,17 +62,15 @@ class MonteCarloSimulation {
     return _referenceDeck;
   }
 
-  static void _calculateProbability(Probability p, Map<String, double> outcomes){
-      
-      p.probabilityToHighCard = (outcomes[Ranks.highCard] ?? 0.0) / p.scenarios;
-      p.probabilityToPair = (outcomes[Ranks.pair] ?? 0.0) / p.scenarios;
-      p.probabilityToTwoPairs = (outcomes[Ranks.twoPairs] ?? 0.0) / p.scenarios;
-      p.probabilityToThreeOfAKind = (outcomes[Ranks.threeOfAKind] ?? 0.0) / p.scenarios;
-      p.probabilityToStraight = (outcomes[Ranks.straight] ?? 0.0) / p.scenarios;
-      p.probabilityToFlush = (outcomes[Ranks.flush] ?? 0.0) / p.scenarios;
-      p.probabilityToFullHouse = (outcomes[Ranks.fullHouse] ?? 0.0) / p.scenarios;
-      p.probabilityToFourOfAKind = (outcomes[Ranks.fourOfAkind] ?? 0.0) / p.scenarios;
-      p.probabilityToStraightFlush = (outcomes[Ranks.straightFlush] ?? 0.0) / p.scenarios;
+  static void _calculateProbability(Probability p, Map<String, double> outcomes) {
+    p.probabilityToHighCard = (outcomes[Ranks.highCard] ?? 0.0) / p.scenarios;
+    p.probabilityToPair = (outcomes[Ranks.pair] ?? 0.0) / p.scenarios;
+    p.probabilityToTwoPairs = (outcomes[Ranks.twoPairs] ?? 0.0) / p.scenarios;
+    p.probabilityToThreeOfAKind = (outcomes[Ranks.threeOfAKind] ?? 0.0) / p.scenarios;
+    p.probabilityToStraight = (outcomes[Ranks.straight] ?? 0.0) / p.scenarios;
+    p.probabilityToFlush = (outcomes[Ranks.flush] ?? 0.0) / p.scenarios;
+    p.probabilityToFullHouse = (outcomes[Ranks.fullHouse] ?? 0.0) / p.scenarios;
+    p.probabilityToFourOfAKind = (outcomes[Ranks.fourOfAkind] ?? 0.0) / p.scenarios;
+    p.probabilityToStraightFlush = (outcomes[Ranks.straightFlush] ?? 0.0) / p.scenarios;
   }
-  
 }
