@@ -18,8 +18,7 @@ class HandModel {
   String currentRank;
 
   Future<Probability> computeProbabilities() async {
-    final p = ReceivePort('Monte Carlo Simulation');
-
+    final p = ReceivePort();
     await Isolate.spawn(_runIsolated, p.sendPort);
     return await p.first as Probability;
   }
