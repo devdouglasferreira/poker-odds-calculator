@@ -53,7 +53,7 @@ jobs:
         working-directory: android
       
       - name: Upload to Play Store (beta)
-      - run: |
+        run: |
           echo "$PLAY_STORE_CONFIG_JSON" > play-store-config.json
           bundle exec fastlane ${{ github.event.inputs.lane || 'beta' }}
         env:
