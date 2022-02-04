@@ -11,8 +11,8 @@ on:
   push:
     branch:
     - develop
-    tags:
-    - 'v*'
+    # tags:
+    # - 'v*'
 
 jobs:
   fastlane-deploy:
