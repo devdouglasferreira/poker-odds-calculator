@@ -32,8 +32,8 @@ platform :android do
       sh("flutter", "packages", "get")
       sh("flutter", "clean")
       sh("flutter", "build", "appbundle", "--build-number=#{build_number}")
-      sh("ls", "build/app/outputs/bundle/release")
-      upload_to_play_store(track: 'beta', aab: "build/app/outputs/bundle/release/app.aab")  
+      
+      upload_to_play_store(track: 'beta', aab: "build/app/outputs/bundle/release/app-release.aab")  
     end
   end
 end
