@@ -9,8 +9,8 @@ on:
         default: 'beta'
   # Refs/tags push events to matching v*, i.e. v1.0, v20.15.10
   push:
-    branch:
-    - develop
+    branches:
+    - feature/ci-cd-release-alpha
     # tags:
     # - 'v*'
 
@@ -51,7 +51,8 @@ jobs:
           KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
         working-directory: android
-
+      
+      - name: Upload to Play Store (beta)
       - run: |
           echo "$PLAY_STORE_CONFIG_JSON" > play-store-config.json
           bundle exec fastlane ${{ github.event.inputs.lane || 'beta' }}
