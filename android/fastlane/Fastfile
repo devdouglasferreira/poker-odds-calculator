@@ -28,7 +28,6 @@ platform :android do
   desc "Deploy a new beta build to Google Play"
   lane :beta do
     build_number = number_of_commits(all: true)
-    increment_build_number(build_number: build_number)
     Dir.chdir "../.." do
       sh("flutter", "packages", "get")
       sh("flutter", "clean")
