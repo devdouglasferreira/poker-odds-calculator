@@ -30,15 +30,24 @@ class GameHandComponentState extends State<GameHandComponent> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(40.0),
+          padding: EdgeInsets.only(bottom: 5, top:10),
           child: StreamBuilder(
             stream: _handBloc.handStream,
             builder: (context, snapshot) => Text(
               _handBloc.currentRound,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white, fontSize: 15),
             ),
           ),
         ),
+        Padding(
+            padding: EdgeInsets.only(bottom: 10, top:5),
+            child: StreamBuilder(
+              stream: _handBloc.handStream,
+              builder: (context, snapshot) => Text(
+                '${_handBloc.hand.currentRank ?? ''}',
+                style: TextStyle(color: Colors.white, fontSize: 15),
+              ),
+            )),
         StreamBuilder(
           stream: _handBloc.handStream,
           builder: (context, snapshot) => Row(
@@ -71,7 +80,8 @@ class GameHandComponentState extends State<GameHandComponent> {
   Widget _cardPlaceHolder() {
     return DragTarget<Card>(
       builder: (context, candidates, rejects) {
-        return Container(margin: const EdgeInsets.all(5.0), padding: const EdgeInsets.all(10.0), decoration: BoxDecoration(border: Border.all(width: 2)));
+        return Container(
+            margin: const EdgeInsets.all(5.0), padding: const EdgeInsets.all(10.0), decoration: BoxDecoration(border: Border.all(width: 2)));
       },
       onAccept: (x) => {},
     );
