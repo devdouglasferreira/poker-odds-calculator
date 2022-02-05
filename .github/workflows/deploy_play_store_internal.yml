@@ -1,4 +1,4 @@
-name: Deploy to Play Store
+name: Deploy to Play Store (Internal)
 on:
   workflow_dispatch:
     inputs:
