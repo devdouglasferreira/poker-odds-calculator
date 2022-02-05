@@ -10,6 +10,7 @@ on:
   push:
     branches:
     - 'feature/ci-cd-release-alpha'
+    - develop
 
 jobs:
   fastlane-deploy:
