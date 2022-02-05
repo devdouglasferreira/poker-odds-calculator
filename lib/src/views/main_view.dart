@@ -1,10 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:poker_odds_calculator/src/blocs/deck_block.dart';
+import 'package:poker_odds_calculator/src/blocs/deck_bloc.dart';
 import 'package:poker_odds_calculator/src/blocs/hand_bloc.dart';
-import 'package:poker_odds_calculator/src/view_components/card_deck.dart';
-import 'package:poker_odds_calculator/src/view_components/game_hand.dart';
-import 'package:poker_odds_calculator/src/view_components/opponents_setup.dart';
+import 'package:poker_odds_calculator/src/components/card_deck.dart';
+import 'package:poker_odds_calculator/src/components/game_hand.dart';
+import 'package:poker_odds_calculator/src/components/opponents_setup.dart';
+import 'package:poker_odds_calculator/src/components/rank_probabilities.dart';
 
 class MainView extends StatefulWidget {
   @override
@@ -14,38 +16,42 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
-  HandBloc _handBloc = new HandBloc();
-  DeckBloc _cardDeckBloc = new DeckBloc();
+  HandBloc _handBloc;
+  DeckBloc _cardDeckBloc;
+  Random r = new Random();
 
-  @override
-  void initState() {
-    super.initState();
-    return;
+  _MainViewState() {
+    _handBloc = new HandBloc();
+    _cardDeckBloc = new DeckBloc();
   }
 
   @override
-  void dispose() {
-    super.dispose();
+  void setState(VoidCallback fn) {
+    super.setState(fn);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Color.fromRGBO(8, 80, 0, 1),
-      child: SafeArea(
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(color: Color(0xFF005913)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
+            RankProbabilitiesComponent(_handBloc),
             GameHandComponent(_handBloc),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Padding(padding: EdgeInsets.only(left:15, right:5),
-                  child: StreamBuilder(
-                stream: _handBloc.handStream,
-                builder: (context, snapshot) => Text(
-                  '${_handBloc.hand.currentRank ?? ''}',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
+              Padding(
+                padding: EdgeInsets.only(left: 15, right: 5),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Color(0xFFA65F08)),
+                    shape: MaterialStateProperty.all(CircleBorder()),
+                  ),
+                  child: Icon(Icons.restart_alt),
+                  onPressed: () => setState(() {}),
                 ),
-              )),
+              ),
               OpponentSetupComponent(_handBloc),
             ]),
             CardDeckComponent(_handBloc, _cardDeckBloc),
