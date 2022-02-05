@@ -6,7 +6,6 @@ on:
         description: 'Fastlane lane to use (internal)'
         required: true
         default: 'internal'
-  
   push:
     branches:
     - 'feature/ci-cd-release-alpha'
