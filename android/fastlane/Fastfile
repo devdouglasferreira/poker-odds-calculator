@@ -17,13 +17,17 @@ default_platform(:android)
 
 platform :android do
 
-  # desc "Runs all the tests"
-  # lane :test do
-  #   Dir.chdir "../.." do
-  #     sh("flutter", "packages", "get")
-  #     sh("flutter", "test")
-  #   end
-  # end
+  desc "Deploy a new beta build to Google Play"
+  lane :internal do
+    build_number = number_of_commits()
+    puts "Build number: #{build_number}"
+    Dir.chdir "../.." do
+      sh("flutter", "packages", "get")
+      sh("flutter", "clean")
+      sh("flutter", "build", "appbundle", "--build-number=#{build_number+2}")
+    end
+    upload_to_play_store_internal_app_sharing(track: 'beta', aab: "../build/app/outputs/bundle/release/app-release.aab")
+  end
 
   desc "Deploy a new beta build to Google Play"
   lane :beta do
@@ -35,5 +39,6 @@ platform :android do
       sh("flutter", "build", "appbundle", "--build-number=#{build_number+2}")
     end
     upload_to_play_store(track: 'beta', aab: "../build/app/outputs/bundle/release/app-release.aab")  
+    upload_to_play_store_internal_app_sharing()
   end
 end
