@@ -9,6 +9,7 @@ on:
   push:
     branches:
     - 'develop'
+    - 'feature/ci-cd-fixes'
 
 jobs:
   fastlane-deploy:

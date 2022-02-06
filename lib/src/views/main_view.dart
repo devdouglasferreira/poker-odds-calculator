@@ -21,17 +21,20 @@ class _MainViewState extends State<MainView> {
   Random r = new Random();
 
   _MainViewState() {
-    _handBloc = new HandBloc();
+   _handBloc = new HandBloc();
     _cardDeckBloc = new DeckBloc();
   }
 
   @override
   void setState(VoidCallback fn) {
+    _handBloc = new HandBloc();
+    _cardDeckBloc = new DeckBloc();
     super.setState(fn);
   }
 
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(color: Color(0xFF005913)),
@@ -49,7 +52,7 @@ class _MainViewState extends State<MainView> {
                     shape: MaterialStateProperty.all(CircleBorder()),
                   ),
                   child: Icon(Icons.restart_alt),
-                  onPressed: () => setState(() {}),
+                  onPressed: () => Navigator.pushReplacementNamed(context, '/'),
                 ),
               ),
               OpponentSetupComponent(_handBloc),
