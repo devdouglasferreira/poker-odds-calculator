@@ -25,7 +25,7 @@ void main() {
 
     var result = HandMatcher.getHandRank(sevenCards);
 
-    expect(result.item1, Ranks.pair);
+    expect(result, Ranks.pair);
   });
 
   test('Get \'Two Pairs\' Hand Rank', () {
@@ -46,7 +46,7 @@ void main() {
 
     var result = HandMatcher.getHandRank(sevenCards);
 
-    expect(result.item1, Ranks.twoPairs);
+    expect(result, Ranks.twoPairs);
   });
 
   test('Get \'Three of a Kind\' Hand Rank', () {
@@ -67,7 +67,7 @@ void main() {
 
     var result = HandMatcher.getHandRank(sevenCards);
 
-    expect(result.item1, Ranks.threeOfAKind);
+    expect(result, Ranks.threeOfAKind);
   });
 
   test('Get \'Straight\' Hand Rank', () {
@@ -90,7 +90,7 @@ void main() {
 
     var result = HandMatcher.getHandRank(sevenCards);
 
-    expect(result.item1, Ranks.straight);
+    expect(result, Ranks.straight);
   });
 
   test('Get \'Flush\' Hand Rank', () {
@@ -111,7 +111,7 @@ void main() {
 
     var result = HandMatcher.getHandRank(sevenCards);
 
-    expect(result.item1, Ranks.flush);
+    expect(result, Ranks.flush);
   });
 
   test('Get \'Full House\' Hand Rank', () {
@@ -132,7 +132,7 @@ void main() {
 
     var result = HandMatcher.getHandRank(sevenCards);
 
-    expect(result.item1, Ranks.fullHouse);
+    expect(result, Ranks.fullHouse);
   });
 
   test('Get \'Four of a Kind\' Hand Rank', () {
@@ -153,7 +153,7 @@ void main() {
 
     var result = HandMatcher.getHandRank(sevenCards);
 
-    expect(result.item1, Ranks.fourOfAkind);
+    expect(result, Ranks.fourOfAkind);
   });
 
   test('Get \'Straight Flush\' Hand Rank', () {
@@ -176,6 +176,6 @@ void main() {
 
     var result = HandMatcher.getHandRank(sevenCards);
 
-    expect(result.item1, Ranks.straightFlush);
+    expect(result, Ranks.straightFlush);
   });
 }

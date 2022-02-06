@@ -9,7 +9,7 @@ void main() {
     hand.currentHand = [CardModel.keyless(7, Suit.clubs), CardModel.keyless(11, Suit.hearts)];
     var result = await MonteCarloSimulation.runSimulation(hand);
 
-    expect(result.scenarios, 50000);
+    expect(result.scenarios, 100000);
   });
 
   test('Monte Carlo Runner [Flop]', () async {
@@ -18,7 +18,7 @@ void main() {
     hand.communityCards = [CardModel.keyless(9, Suit.diamonds), CardModel.keyless(10, Suit.diamonds), CardModel.keyless(2, Suit.spades)];
     var result = await MonteCarloSimulation.runSimulation(hand);
 
-    expect(result.scenarios, 50000);
+    expect(result.scenarios, 100000);
   });
 
   test('Monte Carlo Runner [Turn]', () async {
@@ -32,7 +32,7 @@ void main() {
     ];
     var result = await MonteCarloSimulation.runSimulation(hand);
 
-    expect(result.scenarios, 50000);
+    expect(result.scenarios, 100000);
   });
 
   test('Monte Carlo Runner [River]', () async {
@@ -47,6 +47,6 @@ void main() {
     ];
     var result = await MonteCarloSimulation.runSimulation(hand);
 
-    expect(result.scenarios, 50000);
+    expect(result.scenarios, 100000);
   });
 }
