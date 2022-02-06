@@ -7,5 +7,6 @@
 
 ## About
 
-This is a calculator written in Flutter available at Play Store for calculate Poker probabilities of a coming hand using Monte Carlo simulation algorithm
-This application has been tested only on Android
+This is a calculator written in Flutter available at Play Store for calculate Poker probabilities of a coming hand using Monte Carlo simulation algorithm.
+
+This application has been tested only on Android.
