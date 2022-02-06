@@ -15,26 +15,26 @@ class HandMatcher {
     [10, 11, 12, 13, 14],
   ];
 
-  static Tuple2<String, List<CardModel>> getHandRank(List<CardModel> hand) {
+  static String getHandRank(List<CardModel> hand) {
     if (_checkStraightFlush(hand)) {
-      return Tuple2<String, List<CardModel>>(Ranks.straightFlush, _showdownStraightFlush(hand));
+      return Ranks.straightFlush;
     } else if (_checkFourOfAKind(hand)) {
-      return Tuple2<String, List<CardModel>>(Ranks.fourOfAkind, _showdownFourOfAKind(hand));
+      return Ranks.fourOfAkind;
     } else if (_checkFullHouse(hand)) {
-      return Tuple2<String, List<CardModel>>(Ranks.fullHouse, _showdownFullHouse(hand));
+      return Ranks.fullHouse;
     } else if (_checkFlush(hand)) {
-      return Tuple2<String, List<CardModel>>(Ranks.flush, _showdownFlush(hand));
+      return Ranks.flush;
     } else if (_checkStraight(hand)) {
-      return Tuple2<String, List<CardModel>>(Ranks.straight, _showdownStraight(hand));
+      return Ranks.straight;
     } else if (_checkThreeOfAKind(hand)) {
-      return Tuple2<String, List<CardModel>>(Ranks.threeOfAKind, _showdownThreeOfAKind(hand));
+      return Ranks.threeOfAKind;
     } else if (_checkTwoPair(hand)) {
-      return Tuple2<String, List<CardModel>>(Ranks.twoPairs, _showdownTwoPairs(hand));
+      return Ranks.twoPairs;
     } else if (_checkPair(hand)) {
-      return Tuple2<String, List<CardModel>>(Ranks.pair, _showdownPair(hand));
+      return Ranks.pair;
     }
 
-    return Tuple2<String, List<CardModel>>(Ranks.highCard, _showdownHighCard(hand));
+    return Ranks.highCard;
   }
 
   static bool _checkPair(List<CardModel> hand) => hand.groupListsBy((element) => element.value).entries.any((element) => element.value.length == 2);
@@ -65,48 +65,4 @@ class HandMatcher {
       return false;
     }
   }
-
-  static List<CardModel> _showdownHighCard(List<CardModel> hand) {
-    List<CardModel> finalHand = [];
-    finalHand.addAll(hand.sorted((a, b) => a.value.compareTo(b.value)).reversed.take(5));
-    return finalHand;
-  }
-
-  static List<CardModel> _showdownTwoPairs(List<CardModel> hand) {}
-
-  static List<CardModel> _showdownPair(List<CardModel> hand) {}
-
-  static List<CardModel> _showdownThreeOfAKind(List<CardModel> hand) {}
-
-  static List<CardModel> _showdownStraight(List<CardModel> hand) {}
-
-  static List<CardModel> _showdownFlush(List<CardModel> hand) {
-    List<CardModel> finalHand = [];
-    finalHand.addAll(hand
-        .groupListsBy((element) => element.suit)
-        .entries
-        .firstWhere((element) => element.value.length >= 5)
-        .value
-        .sorted((a, b) => a.value.compareTo(b.value))
-        .reversed
-        .take(5));
-    return finalHand;
-  }
-
-  static List<CardModel> _showdownFullHouse(List<CardModel> hand) {
-    List<CardModel> finalHand = [];
-    finalHand.addAll(hand.groupListsBy((element) => element.value).entries.where((element) => element.value.length == 2).single.value);
-    finalHand.addAll(hand.groupListsBy((element) => element.value).entries.where((element) => element.value.length == 3).single.value);
-    return finalHand;
-  }
-
-  static List<CardModel> _showdownFourOfAKind(List<CardModel> hand) {
-    List<CardModel> finalHand = [];
-    var match = hand.groupListsBy((element) => element.value).entries.where((element) => element.value.length == 4);
-    finalHand.addAll(match.single.value);
-    finalHand.add(hand.sorted((a, b) => a.value.compareTo(b.value)).reversed.firstWhere((element) => !match.contains(element)));
-    return finalHand;
-  }
-
-  static List<CardModel> _showdownStraightFlush(List<CardModel> hand) {}
 }
