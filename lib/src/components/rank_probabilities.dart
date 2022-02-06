@@ -15,7 +15,7 @@ class _RankProbabilitiesComponentState extends State<RankProbabilitiesComponent>
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.only(bottom: 20, left: 10, right: 10),
+        padding: const EdgeInsets.only(bottom: 20, left: 10, right: 10, top:50),
         child: StreamBuilder(
           stream: _handBloc.probabilityStream,
           builder: (context, snapshot) => Table(
