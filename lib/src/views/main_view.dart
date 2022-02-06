@@ -18,7 +18,7 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
   HandBloc _handBloc;
   DeckBloc _cardDeckBloc;
-  Random r = new Random();
+  Random r = Random();
 
   @override
   void setState(VoidCallback fn) {
@@ -27,36 +27,46 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
-    _handBloc = new HandBloc();
-    _cardDeckBloc = new DeckBloc();
+    _handBloc = HandBloc();
+    _cardDeckBloc = DeckBloc();
 
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(color: Color(0xFF005913)),
+        decoration: const BoxDecoration(color: Color(0xFF005913)),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            RankProbabilitiesComponent(_handBloc),
-            StreamBuilder(
-              stream: _handBloc.handStream,
-              builder: ((context, snapshot) => isComputing(_handBloc.hand.computing)),
-            ),
-            GameHandComponent(_handBloc),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Padding(
-                padding: EdgeInsets.only(left: 15, right: 5),
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Color(0xFFA65F08)),
-                    shape: MaterialStateProperty.all(CircleBorder()),
-                  ),
-                  child: Icon(Icons.restart_alt),
-                  onPressed: () => Navigator.pushReplacementNamed(context, '/'),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                RankProbabilitiesComponent(_handBloc),
+                StreamBuilder(
+                  stream: _handBloc.handStream,
+                  builder: ((context, snapshot) => isComputing(_handBloc.hand.computing)),
                 ),
-              ),
-              OpponentSetupComponent(_handBloc),
-            ]),
-            CardDeckComponent(_handBloc, _cardDeckBloc),
+              ],
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                GameHandComponent(_handBloc),
+                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 5),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(const Color(0xFFA65F08)),
+                        shape: MaterialStateProperty.all(const CircleBorder()),
+                      ),
+                      child: const Icon(Icons.restart_alt),
+                      onPressed: () => Navigator.pushReplacementNamed(context, '/'),
+                    ),
+                  ),
+                  OpponentSetupComponent(_handBloc),
+                ]),
+                CardDeckComponent(_handBloc, _cardDeckBloc),
+              ],
+            ),
           ],
         ),
       ),
@@ -64,11 +74,12 @@ class _MainViewState extends State<MainView> {
   }
 
   Widget isComputing(bool computing) {
-    if (computing)
-      return Padding(
+    if (computing) {
+      return const Padding(
         child: CircularProgressIndicator(),
         padding: EdgeInsets.only(bottom: 10),
       );
+    }
     return Container();
   }
 }
