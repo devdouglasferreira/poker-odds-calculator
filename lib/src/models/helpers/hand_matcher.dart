@@ -1,6 +1,5 @@
 import 'package:poker_odds_calculator/src/models/card_model.dart';
 import 'package:collection/collection.dart';
-import 'package:tuple/tuple.dart';
 
 class HandMatcher {
   static List<List<int>> _straightReferences = [

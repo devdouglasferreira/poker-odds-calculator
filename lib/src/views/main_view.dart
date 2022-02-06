@@ -20,21 +20,16 @@ class _MainViewState extends State<MainView> {
   DeckBloc _cardDeckBloc;
   Random r = new Random();
 
-  _MainViewState() {
-   _handBloc = new HandBloc();
-    _cardDeckBloc = new DeckBloc();
-  }
-
   @override
   void setState(VoidCallback fn) {
-    _handBloc = new HandBloc();
-    _cardDeckBloc = new DeckBloc();
     super.setState(fn);
   }
 
   @override
   Widget build(BuildContext context) {
-   
+    _handBloc = new HandBloc();
+    _cardDeckBloc = new DeckBloc();
+
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(color: Color(0xFF005913)),
@@ -42,6 +37,10 @@ class _MainViewState extends State<MainView> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             RankProbabilitiesComponent(_handBloc),
+            StreamBuilder(
+              stream: _handBloc.handStream,
+              builder: ((context, snapshot) => isComputing(_handBloc.hand.computing)),
+            ),
             GameHandComponent(_handBloc),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Padding(
@@ -62,5 +61,14 @@ class _MainViewState extends State<MainView> {
         ),
       ),
     );
+  }
+
+  Widget isComputing(bool computing) {
+    if (computing)
+      return Padding(
+        child: CircularProgressIndicator(),
+        padding: EdgeInsets.only(bottom: 10),
+      );
+    return Container();
   }
 }

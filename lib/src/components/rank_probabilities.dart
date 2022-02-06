@@ -15,7 +15,7 @@ class _RankProbabilitiesComponentState extends State<RankProbabilitiesComponent>
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.only(bottom: 40, left: 10, right: 10),
+        padding: EdgeInsets.only(bottom: 20, left: 10, right: 10),
         child: StreamBuilder(
           stream: _handBloc.probabilityStream,
           builder: (context, snapshot) => Table(
@@ -45,15 +45,20 @@ class _RankProbabilitiesComponentState extends State<RankProbabilitiesComponent>
   TableRow _getTableRow(String title, double value) {
     return TableRow(
       children: [
-        Text(
-          title,
-          style: TextStyle(color: Colors.white),
+        Padding(
+          child: Text(
+            title,
+            style: TextStyle(color: Colors.white),
+          ),
+          padding: EdgeInsets.only(left: 5, top: 2, bottom: 2),
         ),
-        Text(
-          '${((value ?? 0) * 100).toStringAsFixed(2)}%',
-          style: TextStyle(color: Colors.white),
-          textAlign: TextAlign.center,
-        ),
+        Padding(
+            child: Text(
+              '${((value ?? 0) * 100).toStringAsFixed(2)}%',
+              style: TextStyle(color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            padding: EdgeInsets.only(bottom: 2, top: 2)),
       ],
     );
   }

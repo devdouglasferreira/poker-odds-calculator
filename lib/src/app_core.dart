@@ -7,6 +7,7 @@ class ApplicationCore extends StatelessWidget {
     return MaterialApp(
       title: 'Poker Odds Calculator',
       home: MainView(),
+      theme: ThemeData(fontFamily: "Casino")
     );
   }
 }

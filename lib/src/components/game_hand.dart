@@ -30,7 +30,7 @@ class GameHandComponentState extends State<GameHandComponent> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(bottom: 5, top:10),
+          padding: EdgeInsets.only(bottom: 5, top: 10),
           child: StreamBuilder(
             stream: _handBloc.handStream,
             builder: (context, snapshot) => Text(
@@ -40,7 +40,7 @@ class GameHandComponentState extends State<GameHandComponent> {
           ),
         ),
         Padding(
-            padding: EdgeInsets.only(bottom: 10, top:5),
+            padding: EdgeInsets.only(bottom: 10, top: 5),
             child: StreamBuilder(
               stream: _handBloc.handStream,
               builder: (context, snapshot) => Text(
@@ -81,7 +81,10 @@ class GameHandComponentState extends State<GameHandComponent> {
     return DragTarget<Card>(
       builder: (context, candidates, rejects) {
         return Container(
-            margin: const EdgeInsets.all(5.0), padding: const EdgeInsets.all(10.0), decoration: BoxDecoration(border: Border.all(width: 2)));
+          margin: const EdgeInsets.all(5.0),
+          padding: const EdgeInsets.all(5.0),
+          decoration: BoxDecoration(border: Border.all(width: 2), shape: BoxShape.circle),
+        );
       },
       onAccept: (x) => {},
     );

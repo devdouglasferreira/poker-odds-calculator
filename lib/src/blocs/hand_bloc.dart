@@ -56,8 +56,6 @@ class HandBloc {
     handSink.add(hand);
 
     await updateCurrentRound();
-
-    handSink.add(hand);
   }
 
   void addOpponent() {
@@ -88,9 +86,11 @@ class HandBloc {
       probability = await hand.computeProbabilities();
       currentRound = Rounds.river;
     }
-     
-    hand.currentRank = HandMatcher.getHandRank(hand.currentHand + hand.communityCards);;
+
+    hand.currentRank = HandMatcher.getHandRank(hand.currentHand + hand.communityCards);
+    
     probabilitySink.add(probability);
+    handSink.add(hand);
   }
 
   void _updatePlayerHandCard() {
