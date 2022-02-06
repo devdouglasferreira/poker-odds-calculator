@@ -1,14 +1,12 @@
-# Texas Hold'em Odds Calculator
+# Poker Odds Calculator
 
-## Getting Started
+![GitHub](https://img.shields.io/github/license/DouglasDRF/poker-odds-calculator)
+![Codacy grade](https://img.shields.io/codacy/grade/c6305eea17d04b809eedb294905370ca)
+[![Run Tests](https://github.com/DouglasDRF/poker-odds-calculator/actions/workflows/automated_tests.yml/badge.svg)](https://github.com/DouglasDRF/poker-odds-calculator/actions/workflows/automated_tests.yml)
+[![Deploy to Play Store](https://github.com/DouglasDRF/poker-odds-calculator/actions/workflows/beta_deploy_play_store.yml/badge.svg)](https://github.com/DouglasDRF/poker-odds-calculator/actions/workflows/beta_deploy_play_store.yml)
 
-This project is a starting point for a Flutter application.
+## About
 
-A few resources to get you started if this is your first Flutter project:
+This is a calculator written in Flutter available at Play Store for calculate Poker probabilities of a coming hand using Monte Carlo simulation algorithm.
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+This application has been tested only on Android.
