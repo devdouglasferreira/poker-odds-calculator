@@ -10,9 +10,6 @@ on:
   push:
     branches:
       - 'master'
-    tags:
-      - 'v*'
-
 jobs:
   fastlane-deploy:
     runs-on: ubuntu-18.04
