@@ -27,8 +27,6 @@ jobs:
       - name: Checkout gallery code
         uses: actions/checkout@v2
       - run: flutter pub get -v
-
-      - name: Ensure the Dart code is formatted correctly
-        run: flutter format --set-exit-if-changed --dry-run .
+      
       - name: Run Flutter unit tests
         run: flutter test
