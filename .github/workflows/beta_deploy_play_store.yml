@@ -9,9 +9,9 @@ on:
         default: 'beta'
   push:
     branches:
-    - 'master'
-     tags:
-    - 'v*'
+      - 'master'
+    tags:
+      - 'v*'
 
 jobs:
   fastlane-deploy:

@@ -18,14 +18,14 @@ class HandBloc {
     hand = new HandModel();
   }
 
-  final StreamController<HandModel> _handStateController = StreamController<HandModel>.broadcast();
-  final StreamController<Probability> _probabilityController = StreamController<Probability>.broadcast();
+  final StreamController<HandModel> handStateController = StreamController<HandModel>.broadcast();
+  final StreamController<Probability> probabilityController = StreamController<Probability>.broadcast();
 
-  StreamSink<HandModel> get handSink => _handStateController.sink;
-  Stream<HandModel> get handStream => _handStateController.stream;
+  StreamSink<HandModel> get handSink => handStateController.sink;
+  Stream<HandModel> get handStream => handStateController.stream;
 
-  StreamSink<Probability> get probabilitySink => _probabilityController.sink;
-  Stream<Probability> get probabilityStream => _probabilityController.stream;
+  StreamSink<Probability> get probabilitySink => probabilityController.sink;
+  Stream<Probability> get probabilityStream => probabilityController.stream;
 
   List<CardModel> get selectedComunityCards => _selectedCommunityCards;
   List<CardModel> get selectedPlayerCards => _selectedPlayerCards;
@@ -52,10 +52,12 @@ class HandBloc {
 
     _updatePlayerHandCard();
     _updateCommunityCard();
+
+    handSink.add(hand);
+
     await updateCurrentRound();
 
     handSink.add(hand);
-    
   }
 
   void addOpponent() {
@@ -73,7 +75,6 @@ class HandBloc {
   }
 
   Future updateCurrentRound() async {
-    
     if (hand.communityCards.length < 1) {
       currentRound = Rounds.preflop;
       if (hand.currentHand.length == 2) probability = await hand.computeProbabilities();
@@ -87,9 +88,8 @@ class HandBloc {
       probability = await hand.computeProbabilities();
       currentRound = Rounds.river;
     }
-    
-    var result = HandMatcher.getHandRank(hand.currentHand + hand.communityCards);
-    hand.currentRank = result.item1;
+     
+    hand.currentRank = HandMatcher.getHandRank(hand.currentHand + hand.communityCards);;
     probabilitySink.add(probability);
   }
 
@@ -112,7 +112,7 @@ class HandBloc {
   }
 
   void close() {
-    _handStateController.close();
-    _probabilityController.close();
+    handStateController.close();
+    probabilityController.close();
   }
 }

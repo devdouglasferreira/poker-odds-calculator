@@ -12,7 +12,7 @@ class MonteCarloSimulation {
   static UnmodifiableListView<CardModel> _referenceDeck;
   static UnmodifiableListView<CardModel> get referenceDeck => _referenceDeck ?? _generateReferenceDeck();
 
-  static Future<Probability> runSimulation(HandModel hand, {int executions = 50000}) async {
+  static Future<Probability> runSimulation(HandModel hand, {int executions = 100000}) async {
     Probability results = new Probability();
     var outcomes = new Map<String, double>();
 
@@ -43,7 +43,7 @@ class MonteCarloSimulation {
       var playerResult = HandMatcher.getHandRank(localPlayerHand);
 
       results.scenarios++;
-      outcomes.update(playerResult.item1, (x) => ++x, ifAbsent: () => 1);
+      outcomes.update(playerResult, (x) => ++x, ifAbsent: () => 1);
     }
 
     _calculateProbability(results, outcomes);
