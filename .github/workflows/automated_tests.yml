@@ -2,11 +2,11 @@ name: Run Tests
 on:
   push:
     branches:
-    - '**'
+      - '**'
   pull_request:
     branches:
-    - develop
-    - master
+      - develop
+      - master
 
 jobs:
   unit-test:
