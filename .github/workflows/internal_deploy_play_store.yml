@@ -8,7 +8,6 @@ on:
         default: 'internal'
   push:
     branches:
-    - 'feature/ci-cd-release-alpha'
     - 'develop'
 
 jobs:
