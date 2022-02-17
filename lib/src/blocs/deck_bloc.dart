@@ -8,7 +8,7 @@ import '../models/card_model.dart';
 class DeckBloc {
   final StreamController<UnmodifiableListView<CardModel>> _cardState = StreamController<UnmodifiableListView<CardModel>>.broadcast();
 
-  UnmodifiableListView<CardModel> cardDeck;
+  UnmodifiableListView<CardModel>? cardDeck;
 
   DeckBloc() {
     var deck = <CardModel>[];
@@ -16,28 +16,28 @@ class DeckBloc {
     for (int i = 0; i <= 3; i++) {
       for (int j = 2; j <= 14; j++) {
         String cardName = '${Mappers.mapSuit(i)}_${j.toString()}';
-        Key key = new Key(cardName);
-        CardModel card = new CardModel(j, Mappers.mapSuit(i), key);
+        Key key = Key(cardName);
+        CardModel card = CardModel(j, Mappers.mapSuit(i), key);
         deck.add(card);
       }
     }
-    cardDeck = new UnmodifiableListView(deck);
+    cardDeck = UnmodifiableListView(deck);
   }
 
-  StreamSink<UnmodifiableListView<CardModel>> get cardSink => _cardState.sink;
+  StreamSink<UnmodifiableListView<CardModel>?> get cardSink => _cardState.sink;
   Stream<UnmodifiableListView<CardModel>> get cardStream => _cardState.stream;
 
   void addToDeck(CardModel card) {
-    cardDeck.add(card);
+    cardDeck?.add(card);
   }
 
   void selectCard(CardModel card) {
-    cardDeck[cardDeck.indexOf(card)].isSelected = true;
+    cardDeck?[cardDeck!.indexOf(card)].isSelected = true;
     cardSink.add(cardDeck);
   }
 
   void unSelectCard(CardModel card) {
-    cardDeck[cardDeck.indexOf(card)].isSelected = false;
+    cardDeck?[cardDeck!.indexOf(card)].isSelected = false;
     cardSink.add(cardDeck);
   }
 

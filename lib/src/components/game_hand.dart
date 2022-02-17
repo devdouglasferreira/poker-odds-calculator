@@ -2,21 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:poker_odds_calculator/src/blocs/hand_bloc.dart';
 import 'package:poker_odds_calculator/src/models/card_model.dart';
 
-class GameHandComponent extends StatefulWidget {
+class GameHandComponent extends StatelessWidget {
   final HandBloc _handBloc;
 
   GameHandComponent(this._handBloc);
-
-  @override
-  State<StatefulWidget> createState() {
-    return GameHandComponentState(_handBloc);
-  }
-}
-
-class GameHandComponentState extends State<GameHandComponent> {
-  HandBloc _handBloc;
-
-  GameHandComponentState(this._handBloc);
 
   @override
   Widget build(BuildContext context) {
@@ -30,22 +19,22 @@ class GameHandComponentState extends State<GameHandComponent> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(bottom: 5, top: 10),
+          padding: const EdgeInsets.only(bottom: 5, top: 10),
           child: StreamBuilder(
             stream: _handBloc.handStream,
             builder: (context, snapshot) => Text(
               _handBloc.currentRound,
-              style: TextStyle(color: Colors.white, fontSize: 15),
+              style: const TextStyle(color: Colors.white, fontSize: 15),
             ),
           ),
         ),
         Padding(
-            padding: EdgeInsets.only(bottom: 10, top: 5),
+            padding: const EdgeInsets.only(bottom: 10, top: 5),
             child: StreamBuilder(
               stream: _handBloc.handStream,
               builder: (context, snapshot) => Text(
-                '${_handBloc.hand.currentRank ?? ''}',
-                style: TextStyle(color: Colors.white, fontSize: 15),
+                _handBloc.hand.currentRank ?? '',
+                style: const TextStyle(color: Colors.white, fontSize: 15),
               ),
             )),
         StreamBuilder(

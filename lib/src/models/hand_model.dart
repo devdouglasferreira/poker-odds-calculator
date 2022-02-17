@@ -5,25 +5,24 @@ import 'package:poker_odds_calculator/src/models/probability_model.dart';
 import 'card_model.dart';
 
 class HandModel {
-  int numberOfOponents;
+  int numberOfOponents = 1;
   int simulationsCount = 40000;
   bool computing = false;
-  List<CardModel> currentHand;
-  List<CardModel> communityCards;
+  List<CardModel> currentHand = [];
+  List<CardModel> communityCards = [];
+  Probability probability = Probability();
+  String? currentRank;
 
-  HandModel() {
-    currentHand = [];
-    communityCards = [];
-    numberOfOponents = 1;
-  }
-  String currentRank;
-
-  Future<Probability> computeProbabilities() async {
+  Future computeProbabilities() async {
+    Stopwatch sw = Stopwatch()..start();
     final p = ReceivePort();
     computing = true;
     await Isolate.spawn(_runIsolated, p.sendPort);
+    probability = await p.first as Probability;
+    print("CALCULATION TIME: ${sw.elapsedMilliseconds} ms");
+    
     computing = false;
-    return await p.first as Probability;
+    
   }
   
   void _runIsolated(SendPort p) async {

@@ -12,7 +12,7 @@ class Mappers {
       case 3:
         return Suit.spades;
       default:
-        throw new RangeError("index value suit should be up to 3");
+        throw RangeError("index value suit should be up to 3");
     }
   }
 

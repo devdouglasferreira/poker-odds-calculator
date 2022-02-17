@@ -3,19 +3,12 @@ import 'package:flutter/material.dart';
 class CardModel {
   int value;
   String suit;
-  Key key;
+  Key? key;
   bool isSelected = false;
 
-  CardModel(int value, String suit, Key key) {
-    this.value = value;
-    this.suit = suit;
-    this.key = key;
-  }
+  CardModel(this.value, this.suit, this.key);
 
-  CardModel.keyless(int value, String suit) {
-    this.value = value;
-    this.suit = suit;
-  }
+  CardModel.keyless(this.value, this.suit);
 }
 
 class Suit {

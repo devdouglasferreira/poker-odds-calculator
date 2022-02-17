@@ -11,27 +11,20 @@ class HandBloc {
   List<CardModel> _selectedCommunityCards = [];
 
   HandModel hand;
-  Probability probability;
   String currentRound = Rounds.preflop;
 
-  HandBloc() {
-    hand = new HandModel();
-  }
+  HandBloc(this.hand);
 
   final StreamController<HandModel> handStateController = StreamController<HandModel>.broadcast();
-  final StreamController<Probability> probabilityController = StreamController<Probability>.broadcast();
 
   StreamSink<HandModel> get handSink => handStateController.sink;
   Stream<HandModel> get handStream => handStateController.stream;
-
-  StreamSink<Probability> get probabilitySink => probabilityController.sink;
-  Stream<Probability> get probabilityStream => probabilityController.stream;
 
   List<CardModel> get selectedComunityCards => _selectedCommunityCards;
   List<CardModel> get selectedPlayerCards => _selectedPlayerCards;
 
   Future selectCardToHand(DeckBloc deck, int cardIndex) async {
-    CardModel card = deck.cardDeck[cardIndex];
+    CardModel card = deck.cardDeck![cardIndex];
     if (hand.currentHand.length < 2 && card.isSelected == false) {
       card.isSelected = true;
       hand.currentHand.add(card);
@@ -73,23 +66,21 @@ class HandBloc {
   }
 
   Future updateCurrentRound() async {
-    if (hand.communityCards.length < 1) {
+    if (hand.communityCards.isEmpty) {
       currentRound = Rounds.preflop;
-      if (hand.currentHand.length == 2) probability = await hand.computeProbabilities();
+      if (hand.currentHand.length == 2) await hand.computeProbabilities();
     } else if (hand.communityCards.length < 4) {
       currentRound = Rounds.flop;
-      if (hand.communityCards.length == 3) probability = await hand.computeProbabilities();
+      if (hand.communityCards.length == 3) await hand.computeProbabilities();
     } else if (hand.communityCards.length < 5) {
       currentRound = Rounds.turn;
-      probability = await hand.computeProbabilities();
+      await hand.computeProbabilities();
     } else {
-      probability = await hand.computeProbabilities();
+      await hand.computeProbabilities();
       currentRound = Rounds.river;
     }
 
     hand.currentRank = HandMatcher.getHandRank(hand.currentHand + hand.communityCards);
-    
-    probabilitySink.add(probability);
     handSink.add(hand);
   }
 
@@ -113,6 +104,5 @@ class HandBloc {
 
   void close() {
     handStateController.close();
-    probabilityController.close();
   }
 }

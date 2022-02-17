@@ -1,38 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:poker_odds_calculator/src/blocs/hand_bloc.dart';
 
-class OpponentSetupComponent extends StatefulWidget {
+class OpponentSetupComponent extends StatelessWidget {
   final HandBloc _handBloc;
 
   OpponentSetupComponent(this._handBloc);
 
   @override
-  State<StatefulWidget> createState() {
-    return OpponentSetupComponentState(_handBloc);
-  }
-}
-
-class OpponentSetupComponentState extends State<OpponentSetupComponent> {
-  HandBloc _handBloc;
-
-  OpponentSetupComponentState(HandBloc handBloc) {
-    this._handBloc = handBloc;
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         Column(
           children: <Widget>[
-            Text('Opponents', style: TextStyle(color: Colors.white, fontSize: 18)),
+            const Text('Opponents', style: TextStyle(color: Colors.white, fontSize: 18)),
             StreamBuilder(
               stream: _handBloc.handStream,
               builder: (context, snapshot) => Text(
                 '${_handBloc.hand.numberOfOponents}',
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               ),
             ),
           ],
@@ -40,30 +26,30 @@ class OpponentSetupComponentState extends State<OpponentSetupComponent> {
         Column(
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(left: 10, right: 10),
+              padding: const EdgeInsets.only(left: 10, right: 10),
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Color(0xFFA65F08)),
-                  shape: MaterialStateProperty.all(CircleBorder()),
+                  backgroundColor: MaterialStateProperty.all(const Color(0xFFA65F08)),
+                  shape: MaterialStateProperty.all(const CircleBorder()),
                 ),
-                child: Icon(Icons.arrow_upward),
+                child: const Icon(Icons.arrow_upward),
                 onPressed: () => _handBloc.addOpponent(),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Color(0xFFA65F08)),
-                  shape: MaterialStateProperty.all(CircleBorder()),
+                  backgroundColor: MaterialStateProperty.all(const Color(0xFFA65F08)),
+                  shape: MaterialStateProperty.all(const CircleBorder()),
                 ),
-                child: Icon(Icons.arrow_downward),
+                child: const Icon(Icons.arrow_downward),
                 onPressed: () => _handBloc.removeOpponent(),
               ),
             )
           ],
         )
       ],
-    ));
+    );
   }
 }
