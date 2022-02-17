@@ -2,7 +2,7 @@ import 'package:poker_odds_calculator/src/models/card_model.dart';
 import 'package:collection/collection.dart';
 
 class HandMatcher {
-  static List<List<int>> _straightReferences = [
+  static final List<List<int>> _straightReferences = [
     [2, 3, 4, 5, 6],
     [3, 4, 5, 6, 7],
     [4, 5, 6, 7, 8],

@@ -4,37 +4,22 @@ import 'package:poker_odds_calculator/src/blocs/deck_bloc.dart';
 import 'package:poker_odds_calculator/src/blocs/hand_bloc.dart';
 import 'package:poker_odds_calculator/src/models/card_model.dart';
 
-class CardDeckComponent extends StatefulWidget {
+class CardDeckComponent extends StatelessWidget {
   final HandBloc _handBloc;
   final DeckBloc _deckBloc;
 
   CardDeckComponent(this._handBloc, this._deckBloc);
 
   @override
-  State<StatefulWidget> createState() {
-    return _CardDeckComponentState(_handBloc, _deckBloc);
-  }
-}
-
-class _CardDeckComponentState extends State<CardDeckComponent> {
-  HandBloc _handBloc;
-  DeckBloc _deckBloc;
-
-  _CardDeckComponentState(HandBloc handBloc, DeckBloc deckBloc) {
-    _handBloc = handBloc;
-    _deckBloc = deckBloc;
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(bottom: 20, left: 5, right: 5),
+        margin: const EdgeInsets.only(bottom: 20, left: 5, right: 5),
         child: Column(
           children: <Widget>[
-            Row(children: [for (var c in _deckBloc.cardDeck.where((x) => x.suit == Suit.clubs)) _loadCard(c)]),
-            Row(children: [for (var c in _deckBloc.cardDeck.where((x) => x.suit == Suit.hearts)) _loadCard(c)]),
-            Row(children: [for (var c in _deckBloc.cardDeck.where((x) => x.suit == Suit.spades)) _loadCard(c)]),
-            Row(children: [for (var c in _deckBloc.cardDeck.where((x) => x.suit == Suit.diamonds)) _loadCard(c)])
+            Row(children: [for (var c in _deckBloc.cardDeck!.where((x) => x.suit == Suit.clubs)) _loadCard(c)]),
+            Row(children: [for (var c in _deckBloc.cardDeck!.where((x) => x.suit == Suit.hearts)) _loadCard(c)]),
+            Row(children: [for (var c in _deckBloc.cardDeck!.where((x) => x.suit == Suit.spades)) _loadCard(c)]),
+            Row(children: [for (var c in _deckBloc.cardDeck!.where((x) => x.suit == Suit.diamonds)) _loadCard(c)])
           ],
         ));
   }
@@ -51,7 +36,7 @@ class _CardDeckComponentState extends State<CardDeckComponent> {
             child: InkWell(
               key: c.key,
               onTap: ()  {
-                 _handBloc.selectCardToHand(_deckBloc, _deckBloc.cardDeck.indexOf((c)));
+                 _handBloc.selectCardToHand(_deckBloc, _deckBloc.cardDeck!.indexOf((c)));
               },
               child: Image.asset('assets/images/${c.suit}_${c.value}.png'),
             ),

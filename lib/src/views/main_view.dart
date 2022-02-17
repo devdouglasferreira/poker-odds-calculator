@@ -8,6 +8,13 @@ import 'package:poker_odds_calculator/src/components/game_hand.dart';
 import 'package:poker_odds_calculator/src/components/opponents_setup.dart';
 import 'package:poker_odds_calculator/src/components/rank_probabilities.dart';
 
+import '../models/hand_model.dart';
+
+class MainViewArgs {
+  int lastOpponentNumbers = 1;
+  MainViewArgs(this.lastOpponentNumbers);
+}
+
 class MainView extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -16,19 +23,18 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
-  HandBloc _handBloc;
-  DeckBloc _cardDeckBloc;
   Random r = Random();
-
-  @override
-  void setState(VoidCallback fn) {
-    super.setState(fn);
-  }
+  MainViewArgs? args;
 
   @override
   Widget build(BuildContext context) {
-    _handBloc = HandBloc();
-    _cardDeckBloc = DeckBloc();
+    HandBloc _handBloc = HandBloc(HandModel());
+    DeckBloc _cardDeckBloc = DeckBloc();
+
+    if (ModalRoute.of(context)?.settings.arguments != null) {
+      args = ModalRoute.of(context)?.settings.arguments as MainViewArgs;
+      _handBloc.hand.numberOfOponents = args!.lastOpponentNumbers;
+    }
 
     return Scaffold(
       body: Container(
@@ -36,8 +42,8 @@ class _MainViewState extends State<MainView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+            Stack(
+              alignment: Alignment.center,
               children: [
                 RankProbabilitiesComponent(_handBloc),
                 StreamBuilder(
@@ -59,7 +65,7 @@ class _MainViewState extends State<MainView> {
                         shape: MaterialStateProperty.all(const CircleBorder()),
                       ),
                       child: const Icon(Icons.restart_alt),
-                      onPressed: () => Navigator.pushReplacementNamed(context, '/'),
+                      onPressed: () => Navigator.pushReplacementNamed(context, '/', arguments: MainViewArgs(_handBloc.hand.numberOfOponents)),
                     ),
                   ),
                   OpponentSetupComponent(_handBloc),
@@ -75,10 +81,7 @@ class _MainViewState extends State<MainView> {
 
   Widget isComputing(bool computing) {
     if (computing) {
-      return const Padding(
-        child: CircularProgressIndicator(),
-        padding: EdgeInsets.only(bottom: 10),
-      );
+      return const CircularProgressIndicator(color: Color(0xFFA65F08), strokeWidth: 5, backgroundColor: Color(0xFF593509));
     }
     return Container();
   }
