@@ -1,6 +1,4 @@
-import 'dart:async';
 import 'dart:collection';
-
 import 'package:poker_odds_calculator/src/models/probability_model.dart';
 import 'package:poker_odds_calculator/src/models/hand_model.dart';
 import 'package:poker_odds_calculator/src/models/helpers/hand_matcher.dart';
@@ -8,37 +6,38 @@ import 'package:poker_odds_calculator/src/models/helpers/hand_matcher.dart';
 import '../card_model.dart';
 import 'mappers.dart';
 
+class SimulationMessage {
+  late HandModel hand;
+  late Probability results;
+  late Map<String, double> outcomes;
+  late double iterations;
+}
+
 class MonteCarloSimulation {
   static UnmodifiableListView<CardModel>? _referenceDeck;
   static UnmodifiableListView<CardModel> get referenceDeck => _referenceDeck ?? _generateReferenceDeck();
 
-  static Probability runSimulation(HandModel hand, {int executions = 100000}) {
-    //const int chunkLoop = 8;
-    Probability results = Probability();
-    var outcomes = <String, double>{};
-    //List<Future> scenariosTasks = [];
-
-    _simulate(hand, results, outcomes, executions.toDouble());
-
-    // for (int i = 0; i < chunkLoop; i++) {
-    //   Future t = Future(() => _simulate(hand, results, outcomes, executions / chunkLoop));
-    //   scenariosTasks.add(t);
-    // }
-
-    // await Future.wait(scenariosTasks);
-    _calculateProbability(results, outcomes);
-    return results;
+  static Probability runSimulation(HandModel hand, {int executions = 10000}) {
+    return _simulateScenarios(hand, executions);
   }
 
-  static void _simulate(HandModel hand, Probability results, Map<String, double> outcomes, double iterations) {
+  static Probability _simulateScenarios(HandModel hand, int iterations) {
+    List<CardModel> currentDeck;
+    List<CardModel> localPlayerHand;
+    List<CardModel> localCommunity;
+    Map<String, int> outcomes = <String, int>{};
+    Map<int, List<CardModel>> virtualOpponent;
+    String playerResult;
+    int playerRank;
+    List<int> opponentsRank;
+
     for (int i = 0; i < iterations; i++) {
-      List<CardModel> currentDeck = referenceDeck.toList();
-      List<CardModel> localPlayerHand = [];
-      List<CardModel> localCommunity = [];
-      Map<int, List<CardModel>> virtualOpponent = <int, List<CardModel>>{};
-      String playerResult;
-      int playerRank;
-      List<int> opponentsRank = [];
+
+      currentDeck = referenceDeck.toList();
+      localPlayerHand = [];
+      localCommunity = [];
+      virtualOpponent = <int, List<CardModel>>{};
+      opponentsRank = [];
 
       localPlayerHand.addAll(hand.currentHand);
       localCommunity.addAll(hand.communityCards);
@@ -46,15 +45,13 @@ class MonteCarloSimulation {
       currentDeck.removeWhere((i) => localPlayerHand.any((j) => j.suit == i.suit && j.value == i.value));
       currentDeck.shuffle();
 
-      if (localCommunity.length < 5) {
-        for (int i = localCommunity.length; i < 5; i++) {
-          localCommunity.add(currentDeck.removeLast());
-        }
-      }
+      localCommunity.addAll(currentDeck.take(5 - localCommunity.length));
 
       for (int i = 0; i < hand.numberOfOponents; i++) {
+
         List<CardModel> x = [];
-        x.addAll([currentDeck.removeLast(), currentDeck.removeLast()]);
+
+        x.addAll(currentDeck.take(2));
         x.addAll(localCommunity);
         opponentsRank.add(Mappers.mapRank(HandMatcher.getHandRank(x)));
         virtualOpponent.putIfAbsent(i, () => x);
@@ -77,23 +74,15 @@ class MonteCarloSimulation {
         }
       }
 
-      results.scenarios++;
       outcomes.update(playerResult, (x) => ++x, ifAbsent: () => 1);
     }
+    return _calculateProbability(outcomes, iterations);
   }
 
-  static UnmodifiableListView<CardModel> _generateReferenceDeck() {
-    List<CardModel> l = [];
-    for (int i = 0; i < 4; i++) {
-      for (int j = 2; j <= 14; j++) {
-        l.add(CardModel.keyless(j, Mappers.mapSuit(i)));
-      }
-    }
-    _referenceDeck = UnmodifiableListView(l);
-    return _referenceDeck!;
-  }
-
-  static void _calculateProbability(Probability p, Map<String, double> outcomes) {
+  
+  static Probability _calculateProbability(Map<String, int> outcomes, int iterations) {
+    Probability p = Probability();
+    p.scenarios = iterations;      
     p.probabilityToHighCard = (outcomes[Ranks.highCard] ?? 0.0) / p.scenarios;
     p.probabilityToPair = (outcomes[Ranks.pair] ?? 0.0) / p.scenarios;
     p.probabilityToTwoPairs = (outcomes[Ranks.twoPairs] ?? 0.0) / p.scenarios;
@@ -105,5 +94,18 @@ class MonteCarloSimulation {
     p.probabilityToStraightFlush = (outcomes[Ranks.straightFlush] ?? 0.0) / p.scenarios;
     p.winProbability = (outcomes["Wins"] ?? 0.0) / p.scenarios;
     p.tieProbability = (outcomes["Ties"] ?? 0.0) / p.scenarios;
+
+    return p;
+  }
+
+  static UnmodifiableListView<CardModel> _generateReferenceDeck() {
+    List<CardModel> l = [];
+    for (int i = 0; i < 4; i++) {
+      for (int j = 2; j <= 14; j++) {
+        l.add(CardModel.keyless(j, Mappers.mapSuit(i)));
+      }
+    }
+    _referenceDeck = UnmodifiableListView(l);
+    return _referenceDeck!;
   }
 }
