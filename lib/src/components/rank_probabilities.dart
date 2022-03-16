@@ -50,7 +50,7 @@ class RankProbabilitiesComponent extends StatelessWidget {
         ),
         Padding(
             child: Text(
-              '${((value ?? 0) * 100).toStringAsFixed(2)}%',
+              '${((value ?? 0) * 100.0).toStringAsFixed(3)}%',
               style: const TextStyle(color: Colors.white),
               textAlign: TextAlign.center,
             ),
