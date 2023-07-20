@@ -4,7 +4,6 @@ import 'package:poker_odds_calculator/src/models/card_model.dart';
 import 'package:poker_odds_calculator/src/models/hand_model.dart';
 import 'package:poker_odds_calculator/src/models/helpers/hand_matcher.dart';
 import 'package:poker_odds_calculator/src/models/helpers/round.dart';
-import 'package:poker_odds_calculator/src/models/probability_model.dart';
 
 class HandBloc {
   List<CardModel> _selectedPlayerCards = [];

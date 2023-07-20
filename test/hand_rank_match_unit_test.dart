@@ -73,7 +73,7 @@ void main() {
   test('Get \'Straight\' Hand Rank', () {
     final handModel = HandModel();
 
-    var rand = new Random();
+    var rand = Random();
     int minVal = rand.nextInt(7) + 4;
     handModel.currentHand.add(CardModel.keyless(minVal, Suit.spades));
     handModel.currentHand.add(CardModel.keyless(minVal + 1, Suit.clubs));
@@ -159,7 +159,7 @@ void main() {
   test('Get \'Straight Flush\' Hand Rank', () {
     final handModel = HandModel();
 
-    var rand = new Random();
+    var rand = Random();
     int minVal = rand.nextInt(7) + 4;
     handModel.currentHand.add(CardModel.keyless(minVal, Suit.clubs));
     handModel.currentHand.add(CardModel.keyless(minVal + 1, Suit.clubs));

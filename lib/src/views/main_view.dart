@@ -16,6 +16,8 @@ class MainViewArgs {
 }
 
 class MainView extends StatefulWidget {
+  const MainView({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _MainViewState();
@@ -28,12 +30,12 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
-    HandBloc _handBloc = HandBloc(HandModel());
-    DeckBloc _cardDeckBloc = DeckBloc();
+    HandBloc handBloc = HandBloc(HandModel());
+    DeckBloc cardDeckBloc = DeckBloc();
 
     if (ModalRoute.of(context)?.settings.arguments != null) {
       args = ModalRoute.of(context)?.settings.arguments as MainViewArgs;
-      _handBloc.hand.numberOfOponents = args!.lastOpponentNumbers;
+      handBloc.hand.numberOfOponents = args!.lastOpponentNumbers;
     }
 
     return Scaffold(
@@ -45,17 +47,17 @@ class _MainViewState extends State<MainView> {
             Stack(
               alignment: Alignment.center,
               children: [
-                RankProbabilitiesComponent(_handBloc),
+                RankProbabilitiesComponent(handBloc),
                 StreamBuilder(
-                  stream: _handBloc.handStream,
-                  builder: ((context, snapshot) => isComputing(_handBloc.hand.computing)),
+                  stream: handBloc.handStream,
+                  builder: ((context, snapshot) => isComputing(handBloc.hand.computing)),
                 ),
               ],
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                GameHandComponent(_handBloc),
+                GameHandComponent(handBloc),
                 Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 15, right: 5),
@@ -65,12 +67,12 @@ class _MainViewState extends State<MainView> {
                         shape: MaterialStateProperty.all(const CircleBorder()),
                       ),
                       child: const Icon(Icons.restart_alt),
-                      onPressed: () => Navigator.pushReplacementNamed(context, '/', arguments: MainViewArgs(_handBloc.hand.numberOfOponents)),
+                      onPressed: () => Navigator.pushReplacementNamed(context, '/', arguments: MainViewArgs(handBloc.hand.numberOfOponents)),
                     ),
                   ),
-                  OpponentSetupComponent(_handBloc),
+                  OpponentSetupComponent(handBloc),
                 ]),
-                CardDeckComponent(_handBloc, _cardDeckBloc),
+                CardDeckComponent(handBloc, cardDeckBloc),
               ],
             ),
           ],

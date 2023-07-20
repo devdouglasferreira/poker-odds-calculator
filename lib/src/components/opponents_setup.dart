@@ -4,7 +4,7 @@ import 'package:poker_odds_calculator/src/blocs/hand_bloc.dart';
 class OpponentSetupComponent extends StatelessWidget {
   final HandBloc _handBloc;
 
-  OpponentSetupComponent(this._handBloc);
+  const OpponentSetupComponent(this._handBloc, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

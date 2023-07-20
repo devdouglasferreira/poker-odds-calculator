@@ -8,7 +8,7 @@ class ApplicationCore extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Poker Odds Calculator',
-      home: MainView(),
+      home: const SafeArea(child: MainView()),
       theme: ThemeData(fontFamily: "Casino"),
       debugShowCheckedModeBanner: false,
     );

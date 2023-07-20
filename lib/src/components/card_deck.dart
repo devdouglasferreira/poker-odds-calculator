@@ -8,7 +8,7 @@ class CardDeckComponent extends StatelessWidget {
   final HandBloc _handBloc;
   final DeckBloc _deckBloc;
 
-  CardDeckComponent(this._handBloc, this._deckBloc);
+  const CardDeckComponent(this._handBloc, this._deckBloc, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

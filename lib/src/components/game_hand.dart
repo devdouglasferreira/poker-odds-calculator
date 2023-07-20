@@ -5,11 +5,12 @@ import 'package:poker_odds_calculator/src/models/card_model.dart';
 class GameHandComponent extends StatelessWidget {
   final HandBloc _handBloc;
 
-  GameHandComponent(this._handBloc);
+  const GameHandComponent(this._handBloc, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         StreamBuilder(
           stream: _handBloc.handStream,
@@ -45,7 +46,6 @@ class GameHandComponent extends StatelessWidget {
           ),
         ),
       ],
-      mainAxisAlignment: MainAxisAlignment.center,
     );
   }
 
